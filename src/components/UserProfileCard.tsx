@@ -14,7 +14,7 @@ import {
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
-const templates: { label: string; profile: UserProfile }[] = userProfiles as any
+const templates: { label: string; profile: UserProfile }[] = userProfiles as never
 
 export default function UserProfileSelectorWithAction({
   onGenerate,

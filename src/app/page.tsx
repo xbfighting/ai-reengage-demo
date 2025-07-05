@@ -26,6 +26,7 @@ export default function Home() {
       setShowEmail(true)
     }, 2000)
   }
+  console.log('Generated Prompt:', promptText)
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">

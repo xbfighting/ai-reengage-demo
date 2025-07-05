@@ -3,15 +3,11 @@ import { useState } from 'react'
 import { UserProfile } from '@/lib/types'
 import userProfiles from '@/lib/userProfiles.json'
 
-const templates: { label: string; profile: UserProfile }[] = userProfiles as any
+const templates: { label: string; profile: UserProfile }[] = userProfiles as never
 
 const defaultData: UserProfile = templates[0].profile
 
-export default function UserInputForm({
-	onSubmit,
-}: {
-	onSubmit: (profile: UserProfile, scene: string) => void
-}) {
+export default function UserInputForm() {
 	const [profile, setProfile] = useState<UserProfile>(defaultData)
 	const [scene, setScene] = useState<
 		'Repurchase Reminder' | 'New Product Recommendation' | 'Holiday Greeting'
