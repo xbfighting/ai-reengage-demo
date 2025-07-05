@@ -24,13 +24,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <style jsx global>{`
-          body {
-            background: linear-gradient(135deg,rgb(28, 99, 213),rgb(202, 27, 94));
-            color: #e2e8f0;
-            font-family: 'Geist', sans-serif;z s
-            background-attachment: fixed;
-            background-size: cover;
-          }
           header {
             background: linear-gradient(90deg, #3b82f6, #1e40af);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
