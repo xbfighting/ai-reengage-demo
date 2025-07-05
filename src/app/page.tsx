@@ -29,9 +29,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 text-center mb-10 tracking-tight drop-shadow-sm">
-        AI REENGAGE
-      </h1>
+
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
         {/* 左侧：用户信息 */}
         <div className="md:w-1/2 w-full">

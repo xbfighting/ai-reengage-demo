@@ -37,11 +37,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 TODO:
-- app title
-- click loading text to btn text 'AI generating...'
-- prompt ui polish
-- mock mail generate by openai and fill json etc, betufix
-- userfile polish
 - users data source generate(by user picture gen)
 - data struct defind and polish
 - erp/crm/mail input => struct data output

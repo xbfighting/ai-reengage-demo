@@ -21,19 +21,19 @@ export default function UserProfileSelectorWithAction({
 }: {
   onGenerate: (profile: UserProfile, scene: string) => void
 }) {
-  const [selectedProfile, setSelectedProfile] = useState<UserProfile>(templates[0].profile)
+  const [selectedProfileIdx, setSelectedProfileIdx] = useState(0)
   const [scene, setScene] = useState<'Repurchase Reminder' | 'New Product Recommendation' | 'Holiday Greeting'>('Repurchase Reminder')
+  const profile = templates[selectedProfileIdx].profile
 
   // Radar chart for 6 selected dimensions
   const radarLabels = [
-    'Spending Level',
-    'Beauty Goals',
+    'Spending',
+    'Goals',
     'Risk Preference',
     'Appointment Activity',
-    'Location Level',
-    'Loyalty Score',
+    'Location',
+    'Loyalty',
   ]
-  const profile = selectedProfile
   const dataValues = [
     (profile.spendingLevel ?? 50) / 100,
     (profile.beautyGoals?.length ?? 0) / 6,
@@ -71,32 +71,23 @@ export default function UserProfileSelectorWithAction({
     maintainAspectRatio: false,
   }
 
-  // When user selects a profile, update state
-  const handleSelectProfile = (profile: UserProfile) => {
-    setSelectedProfile(profile)
-  }
-
   return (
-    <div className="bg-white rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-200 p-8 flex flex-col md:flex-row gap-8 items-start">
-      <div className="flex-1">
-        <label className="font-semibold text-lg text-gray-700 mb-2 block">Select User:</label>
-        <div className="flex flex-wrap gap-3 mb-6">
+    <div className="bg-white rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-200 p-8 flex flex-col gap-8 items-start">
+      {/* 选择区：下拉框+按钮同一行 */}
+      <div className="flex flex-col md:flex-row items-center gap-4 w-full mb-4">
+        <select
+          value={selectedProfileIdx}
+          onChange={e => setSelectedProfileIdx(Number(e.target.value))}
+          className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[160px]"
+        >
           {templates.map((t, idx) => (
-            <button
-              key={idx}
-              className={`bg-gradient-to-r from-blue-100 to-blue-200 px-4 py-2 text-base rounded-lg hover:from-blue-200 hover:to-blue-300 transition font-medium text-blue-800 shadow-sm border border-blue-200 ${profile.name === t.profile.name ? 'ring-2 ring-blue-400' : ''}`}
-              onClick={() => handleSelectProfile(t.profile)}
-              type="button"
-            >
-              {t.label}
-            </button>
+            <option key={idx} value={idx}>{t.label}</option>
           ))}
-        </div>
-        <label className="block font-semibold text-gray-700 mb-1">Mail Scene:</label>
+        </select>
         <select
           value={scene}
           onChange={e => setScene(e.target.value as typeof scene)}
-          className="border border-gray-300 rounded-lg px-3 py-2 w-full focus:ring-2 focus:ring-blue-200 focus:outline-none bg-gray-50"
+          className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[200px]"
         >
           <option value="Repurchase Reminder">Repurchase Reminder</option>
           <option value="New Product Recommendation">New Product Recommendation</option>
@@ -104,29 +95,44 @@ export default function UserProfileSelectorWithAction({
         </select>
         <button
           onClick={() => onGenerate(profile, scene)}
-          className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition w-full mt-6 text-lg"
+          className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2 rounded-xl font-semibold shadow-lg transition text-lg whitespace-nowrap"
         >
           Generate Email
         </button>
       </div>
-      <div className="flex-1 flex flex-col items-center">
-        <h2 className="text-2xl font-bold mb-4 text-blue-700">User Profile</h2>
-        <div className="w-full max-w-xs h-72 mb-6">
-          <Radar data={radarData} options={radarOptions} />
-        </div>
-        <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-          <div><strong>Name:</strong> {profile.name}</div>
-          <div><strong>Age:</strong> {profile.age} years</div>
-          <div><strong>Gender:</strong> {profile.gender}</div>
-          <div><strong>Traits:</strong> {profile.traits.join(', ')}</div>
-          <div className="col-span-2"><strong>Lifestyle:</strong> {profile.lifestyle?.join(', ')}</div>
-          <div className="col-span-2"><strong>Surgery History:</strong> {profile.surgery_history.map((s) => `${s.date} - ${s.type}`).join(', ')}</div>
-          <div><strong>Spending Level:</strong> {profile.spendingLevel ?? 'N/A'}</div>
-          <div><strong>Beauty Goals:</strong> {profile.beautyGoals?.join(', ') ?? 'N/A'}</div>
-          <div><strong>Risk Preference:</strong> {profile.riskPreference ?? 'N/A'}</div>
-          <div><strong>Appointment Activity:</strong> {profile.appointmentActivity ?? 'N/A'}</div>
-          <div><strong>Location Level:</strong> {profile.locationLevel ?? 'N/A'}</div>
-          <div><strong>Loyalty Score:</strong> {profile.loyaltyScore ?? 'N/A'}</div>
+      {/* Profile 展示区 */}
+      <div className="flex flex-col md:flex-row gap-8 w-full items-start">
+        <div className="flex-1 flex flex-col items-center w-full">
+          <h2 className="text-2xl font-bold mb-4 text-blue-700 w-full">User Profile</h2>
+          {/* 卡片：雷达图居中一行，信息列表在下 */}
+          <div className="w-full bg-white border-2 border-blue-100 rounded-2xl shadow-lg p-6 flex flex-col items-center">
+            <div className="w-full flex justify-center mb-6">
+              <div className="w-76 h-76 min-w-[30rem]">
+                <Radar data={radarData} options={radarOptions} />
+              </div>
+            </div>
+            <div className="w-full max-w-2xl mx-auto space-y-3">
+              <div className="flex items-center mb-1">
+                <span className="inline-block w-6 h-6 bg-blue-200 text-blue-700 rounded-full flex items-center justify-center mr-2 text-lg font-bold">👤</span>
+                <span className="font-semibold text-gray-700">Name:</span> <span className="ml-2 text-gray-900">{profile.name}</span>
+              </div>
+              <div className="flex items-center mb-1">
+                <span className="font-semibold text-gray-700">Age:</span> <span className="ml-2 text-gray-900">{profile.age} years</span>
+              </div>
+              <div className="flex items-center mb-1">
+                <span className="font-semibold text-gray-700">Gender:</span> <span className="ml-2 text-gray-900">{profile.gender}</span>
+              </div>
+              <div className="flex flex-wrap items-center"><span className="font-semibold text-gray-700 mr-2">Traits:</span> {profile.traits.map((t, i) => <span key={i} className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium mr-2 mb-1">{t}</span>)}</div>
+              <div className="flex flex-wrap items-center"><span className="font-semibold text-gray-700 mr-2">Lifestyle:</span> {profile.lifestyle?.map((l, i) => <span key={i} className="bg-green-100 text-green-700 px-2 py-0.5 rounded text-xs font-medium mr-2 mb-1">{l}</span>)}</div>
+              <div className="flex flex-wrap items-center"><span className="font-semibold text-gray-700 mr-2">Beauty Goals:</span> {profile.beautyGoals?.map((g, i) => <span key={i} className="bg-pink-100 text-pink-700 px-2 py-0.5 rounded text-xs font-medium mr-2 mb-1">{g}</span>)}</div>
+              <div className="flex flex-wrap items-center"><span className="font-semibold text-gray-700 mr-2">Surgery History:</span> {profile.surgery_history.map((s, i) => <span key={i} className="inline-block bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs font-medium mr-2 mb-1">{s.date} - {s.type}</span>)}</div>
+              <div><span className="font-semibold text-gray-700">Spending Level:</span> <span className="ml-2 text-gray-900">{profile.spendingLevel ?? 'N/A'}</span></div>
+              <div><span className="font-semibold text-gray-700">Risk Preference:</span> <span className="ml-2 text-gray-900">{profile.riskPreference ?? 'N/A'}</span></div>
+              <div><span className="font-semibold text-gray-700">Appointment Activity:</span> <span className="ml-2 text-gray-900">{profile.appointmentActivity ?? 'N/A'}</span></div>
+              <div><span className="font-semibold text-gray-700">Location Level:</span> <span className="ml-2 text-gray-900">{profile.locationLevel ?? 'N/A'}</span></div>
+              <div><span className="font-semibold text-gray-700">Loyalty Score:</span> <span className="ml-2 text-gray-900">{profile.loyaltyScore ?? 'N/A'}</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

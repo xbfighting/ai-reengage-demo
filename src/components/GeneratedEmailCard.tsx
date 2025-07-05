@@ -25,14 +25,17 @@ export default function GeneratedEmailCard(
   }, [currentUser?.name])
 
   const handleCopy = async () => {
-    // await navigator.clipboard.writeText(emailText)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    const emailContent = document.querySelector('.generated-email-content')?.innerHTML
+    if (emailContent) {
+      await navigator.clipboard.writeText(emailContent)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
   }
 
   return (
     <div className="p-4 bg-white rounded-xl shadow relative">
-      <h2 className="text-xl font-bold mb-2">Generated Marketing Email:</h2>
+      <h2 className="mt-4 text-xl font-bold mb-2">Generated Marketing Email:</h2>
       {score !== null && (
         <div className="mt-2 text-sm text-green-700 font-semibold">
           Simulated Repurchase Potential Score: {score} (The higher the score, the more likely to convert)
@@ -44,30 +47,32 @@ export default function GeneratedEmailCard(
       >
         {copied ? 'Copied!' : 'Copy'}
       </button>
-      {(() => {
-        switch (currentUser?.name + scene) {
-          case 'AnnaHoliday Greeting':
-            return <AnanHoliday />
-          case 'MikeHoliday Greeting':
-            return <MickHoliday />
-          case 'LindaHoliday Greeting':
-            return <LindaHoliday />
-          case 'AnnaNew Product Recommendation':
-            return <AnnaPR />
-          case 'MikeNew Product Recommendation':
-            return <MickPR />
-          case 'LindaNew Product Recommendation':
-            return <LindaPR />
-          case 'AnnaRepurchase Reminder':
-            return <AnnaRR />
-          case 'MikeRepurchase Reminder':
-            return <MickRR />
-          case 'LindaRepurchase Reminder':
-            return <LindaRR />
-          default:
-            return null
-        }
-      })()}
+      <div className="generated-email-content">
+        {(() => {
+          switch (currentUser?.name + scene) {
+            case 'AnnaHoliday Greeting':
+              return <AnanHoliday />
+            case 'MikeHoliday Greeting':
+              return <MickHoliday />
+            case 'LindaHoliday Greeting':
+              return <LindaHoliday />
+            case 'AnnaNew Product Recommendation':
+              return <AnnaPR />
+            case 'MikeNew Product Recommendation':
+              return <MickPR />
+            case 'LindaNew Product Recommendation':
+              return <LindaPR />
+            case 'AnnaRepurchase Reminder':
+              return <AnnaRR />
+            case 'MikeRepurchase Reminder':
+              return <MickRR />
+            case 'LindaRepurchase Reminder':
+              return <LindaRR />
+            default:
+              return null
+          }
+        })()}
+      </div>
     </div>
   )
 }
