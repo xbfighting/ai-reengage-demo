@@ -1,103 +1,58 @@
-import Image from "next/image";
+"use client"
+
+import { useState } from 'react'
+import UserProfileSelector from '@/components/UserProfileCard'
+import { UserProfile } from '@/lib/types'
+import { generatePrompt } from '@/lib/prompts'
+import mockEmails from '@/lib/mockEmails.json'
+
+interface MockEmail {
+  subject: string
+  body: string
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [result, setResult] = useState<MockEmail | null>(null)
+  const [promptText, setPromptText] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // mock 邮件生成（根据姓名和场景从json查找）
+  const handleGenerate = async (userProfile: UserProfile, scene: string) => {
+    setLoading(true)
+    const prompt = generatePrompt(userProfile, scene)
+    setPromptText(prompt)
+    await new Promise((resolve) => setTimeout(resolve, 500))
+    // @ts-ignore
+    const userEmails = mockEmails[userProfile.name] || {}
+    // @ts-ignore
+    const email = userEmails[scene] || { subject: '[Mock Subject]', body: '[Mock Body]' }
+    setResult(email)
+    setLoading(false)
+  }
+
+  return (
+    <main className="min-h-screen bg-gray-100 p-6">
+      <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 text-center mb-10 tracking-tight drop-shadow-sm">AI REENGAGE</h1>
+      <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
+        {/* 左侧：用户信息 */}
+        <div className="md:w-1/2 w-full">
+          <UserProfileSelector onGenerate={handleGenerate} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        {/* 右侧：提示词+邮件上下结构 */}
+        <div className="md:w-1/2 w-full flex flex-col gap-6 justify-start">
+          {loading && <p className="mt-4 text-gray-500">AI is generating the email, please wait...</p>}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h2 className="text-xl font-bold mb-2 text-blue-700">{result?.subject || 'Subject'}</h2>
+            <div className="whitespace-pre-wrap text-gray-800 text-base">{result?.body || 'Body'}</div>
+          </div>
+          {promptText && (
+            <div className="bg-yellow-50 rounded shadow p-4 text-sm">
+              <h3 className="font-bold mb-2">Prompt for Debugging:</h3>
+              <pre className="whitespace-pre-wrap">{promptText}</pre>
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
+  )
 }

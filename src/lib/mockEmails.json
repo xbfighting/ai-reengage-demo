@@ -1,0 +1,30 @@
+{
+  "Anna": {
+    "Repurchase Reminder": {
+      "subject": "Anna, Your Next Step to Radiant Beauty Awaits!",
+      "body": "Dear Anna,\n\nWe hope you are enjoying the results of your recent treatments. As someone who values a vibrant lifestyle and consistent self-care, now is the perfect time to schedule your next appointment. Our team is ready to help you achieve your beauty goals with personalized recommendations.\n\nWe look forward to welcoming you back soon!\n\nBest wishes,\nYour Beauty Clinic Team"
+    },
+    "New Product Recommendation": {
+      "subject": "Anna, Experience Our Latest Innovation for Your Beauty Goals",
+      "body": "Dear Anna,\n\nWe are excited to introduce a new product designed for clients like you who are always seeking the best in beauty. Based on your preferences and goals, we believe this innovation will be a perfect fit for your routine.\n\nContact us to learn more or book a personalized consultation!\n\nWarm regards,\nYour Beauty Clinic Team"
+    },
+    "Holiday Greeting": {
+      "subject": "Season’s Greetings, Anna! Shine Bright This Holiday Season",
+      "body": "Dear Anna,\n\nWishing you a joyful and radiant holiday season! Thank you for being a valued member of our beauty community. May your days be filled with confidence, happiness, and glowing results.\n\nHappy Holidays!\nYour Beauty Clinic Team"
+    }
+  },
+  "Bob": {
+    "Repurchase Reminder": {
+      "subject": "Bob, Continue Your Journey to Confidence!",
+      "body": "Dear Bob,\n\nIt’s time for your next appointment! As someone who is committed to self-improvement and results, we recommend booking your follow-up session to maintain your progress. Our team is here to support your goals every step of the way.\n\nSee you soon!\nYour Beauty Clinic Team"
+    },
+    "New Product Recommendation": {
+      "subject": "Bob, Discover a New Treatment Tailored for You",
+      "body": "Dear Bob,\n\nWe’re excited to announce a new treatment that matches your preferences and beauty ambitions. Take advantage of this exclusive opportunity to enhance your experience with us.\n\nContact us for details or to schedule a consultation!\n\nBest regards,\nYour Beauty Clinic Team"
+    },
+    "Holiday Greeting": {
+      "subject": "Happy Holidays, Bob! Celebrate with Confidence",
+      "body": "Dear Bob,\n\nWishing you a wonderful holiday season filled with joy and self-confidence. Thank you for choosing us as your partner in your beauty journey.\n\nWarmest wishes,\nYour Beauty Clinic Team"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+[
+  {
+    "label": "Linda (Fear of aging + Likes bargains)",
+    "profile": {
+      "name": "Linda",
+      "age": 47,
+      "gender": "Female",
+      "traits": ["Fear of aging", "Likes bargains", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2022-07-01" },
+        { "type": "Botox", "date": "2023-12-10" }
+      ],
+      "lifestyle": ["Fitness enthusiast", "Prefers natural look"],
+      "spendingLevel": 80,
+      "beautyGoals": ["Anti-aging", "Skin care"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 70,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 85
+    }
+  },
+  {
+    "label": "Mike (Minimalist + Efficiency-oriented)",
+    "profile": {
+      "name": "Mike",
+      "age": 38,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational decision-maker", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2021-05-20" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 60,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 50,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 60
+    }
+  },
+  {
+    "label": "Anna (Social butterfly + Trend seeker)",
+    "profile": {
+      "name": "Anna",
+      "age": 29,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Cares about appearance and socializing", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2023-08-10" }
+      ],
+      "lifestyle": ["Active on social media", "Luxury shopper"],
+      "spendingLevel": 95,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 90,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 75
+    }
+  }
+]
