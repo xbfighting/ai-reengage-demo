@@ -27,6 +27,10 @@ Months Since Last Procedure: ${userInfo.monthsSince || 'Unknown'}
 Output Format: User Profile: xxxxx (Do not add explanations or extra content)
 `;
 
+  if (process.env.APP_ENV === 'dev') {
+    return `User Profile: ${userInfo.name}, ${userInfo.age} years old, ${userInfo.gender}. Key traits: ${userInfo.traits?.join(', ') || 'N/A'}. Loyalty: ${userInfo.loyaltyScore ?? 'N/A'}. (Mocked by AI)`;
+  }
+
   const res = await llm.invoke([
     new SystemMessage("You are a senior medical aesthetics copywriting marketing expert."),
     new HumanMessage(prompt)

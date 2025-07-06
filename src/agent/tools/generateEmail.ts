@@ -2,6 +2,9 @@ import { ChatOpenAI } from '@langchain/openai';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 
 export async function generateEmail({ prompt }: { prompt: string }): Promise<string> {
+  if (process.env.APP_ENV === 'dev') {
+    return `Dear Customer,\nThis is a mock marketing email generated for development.\nPrompt: ${prompt.slice(0, 80)}...`;
+  }
   const llm = new ChatOpenAI({ temperature: 0.85 });
 
   const messages = [
