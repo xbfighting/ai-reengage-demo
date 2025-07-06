@@ -12,13 +12,14 @@ export default function Home() {
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null)
   const [scene, setScene] = useState<string>('holiday')
   const [showEmail, setShowEmail] = useState(false)
+  const [showPrompt, setShowPrompt] = useState(false) // New state for controlling prompt visibility
 
   // mock 邮件生成（根据姓名和场景从json查找）
   const handleGenerate = async (userProfile: UserProfile, scene: string) => {
     setLoading(true)
     setShowEmail(false)
     const prompt = generatePrompt(userProfile, scene)
-    setPromptText(prompt)
+    setPromptText(JSON.stringify(prompt))
     setCurrentUser(userProfile)
     setScene(scene)
     setTimeout(() => {
@@ -30,7 +31,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
-
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
         {/* 左侧：用户信息 */}
         <div className="md:w-1/2 w-full">
@@ -49,15 +49,23 @@ export default function Home() {
               Generating email...
             </div>
           )}
-          {showEmail && !loading && (
-            <GeneratedEmailCard currentUser={currentUser} scene={scene} />
-          )}
-          {/* {promptText && (
+          {showEmail && !loading && <GeneratedEmailCard currentUser={currentUser} scene={scene} />}
+          {promptText && (
             <div className="bg-yellow-50 rounded shadow p-4 text-sm">
-              <h3 className="font-bold mb-2">Prompt for Debugging:</h3>
-              <pre className="whitespace-pre-wrap">{promptText}</pre>
+              <h3
+                className="font-bold mb-2 cursor-pointer flex items-center justify-between"
+                onClick={() => setShowPrompt((prev) => !prev)}
+              >
+                Prompt for Debugging:
+                <span className="text-blue-500">{showPrompt ? 'Collapse' : 'Expand'}</span>
+              </h3>
+              {showPrompt && (
+                <pre className="whitespace-pre-wrap bg-gray-100 p-2 rounded border border-gray-300 overflow-auto">
+                  {JSON.stringify(JSON.parse(promptText), null, 2)}
+                </pre>
+              )}
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </main>
