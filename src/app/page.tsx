@@ -14,7 +14,7 @@ export default function Home() {
   const [showEmail, setShowEmail] = useState(false)
   const [showPrompt, setShowPrompt] = useState(false) // New state for controlling prompt visibility
 
-  // mock 邮件生成（根据姓名和场景从json查找）
+  // Mock email generation (searching JSON based on name and scene)
   const handleGenerate = async (userProfile: UserProfile, scene: string) => {
     setLoading(true)
     setShowEmail(false)
@@ -32,11 +32,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-100 p-6">
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
-        {/* 左侧：用户信息 */}
+        {/* Left: User Information */}
         <div className="md:w-1/2 w-full">
           <UserProfileSelector onGenerate={handleGenerate} />
         </div>
-        {/* 右侧：提示词+邮件上下结构 */}
+        {/* Right: Prompt + Email in a vertical structure */}
         <div className="md:w-1/2 w-full flex flex-col gap-6 justify-start">
           {/* 邮件卡片站位元素 */}
           {!loading && !showEmail && (

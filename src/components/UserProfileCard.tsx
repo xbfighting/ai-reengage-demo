@@ -73,7 +73,7 @@ export default function UserProfileSelectorWithAction({
 
   return (
     <div className="bg-white rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-200 p-8 flex flex-col gap-8 items-start">
-      {/* 选择区：下拉框+按钮同一行 */}
+      {/* Selection Area: Dropdown + Button in the same row */}
       <div className="flex flex-col md:flex-row items-center gap-4 w-full mb-4">
         <select
           value={selectedProfileIdx}
@@ -100,11 +100,11 @@ export default function UserProfileSelectorWithAction({
           Generate Email
         </button>
       </div>
-      {/* Profile 展示区 */}
+      {/* Profile Display Area */}
       <div className="flex flex-col md:flex-row gap-8 w-full items-start">
         <div className="flex-1 flex flex-col items-center w-full">
           <h2 className="text-2xl font-bold mb-4 text-blue-700 w-full">User Profile</h2>
-          {/* 卡片：雷达图居中一行，信息列表在下 */}
+          {/* Card: Radar chart centered in one row, information list below */}
           <div className="w-full bg-white border-2 border-blue-100 rounded-2xl shadow-lg p-6 flex flex-col items-center">
             <div className="w-full flex justify-center mb-6">
               <div className="w-76 h-76 min-w-[30rem]">
