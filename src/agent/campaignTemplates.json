@@ -1,14 +1,20 @@
 [
   {
-    "id": "holiday_discount",
+    "id": "Holiday Greeting",
     "title": "Holiday Greeting + Discount Offer",
     "description": "For high-value customers, send greetings and discounts during holidays",
     "template": "Dear ${name}, Happy ${holidayName}! Thank you for spending over ${minSpend} dollars in the past. We are pleased to offer you an exclusive ${discount}% discount on our facelift services. Don't miss this opportunity, valid for two weeks only."
   },
   {
-    "id": "post_op_followup",
-    "title": "Post-Operation Follow-Up + Reactivation",
-    "description": "Recommended maintenance projects for customers 1-2 years after surgery",
-    "template": "Hello ${name}, it has been ${monthsSince} months since your last ${lastProcedure}. To maintain the best results, we invite you to experience follow-up projects with a ${discount}% discount."
+    "id": "New Product Recommendation",
+    "title": "New Product Recommendation + Discount Offer for Loyal Customers",
+    "description": "For loyal customers, recommend new products and offer discounts",
+    "template": "Dear ${name}, we are excited to introduce our new ${productName} product, which is perfect for your ${beautyGoal}. As a loyal customer, you can enjoy a ${discount}% discount on your next purchase. This offer is valid for one month."
+  },
+  {
+    "id": "Repurchase Reminder",
+    "title": "Repurchase Reminder + Discount Offer for Loyal Customers",
+    "description": "For loyal customers, remind them to repurchase and offer discounts",
+    "template": "Dear ${name}, we noticed that you enjoyed our ${lastProductName} product. As a token of our appreciation, we would like to offer you a ${discount}% discount on your next purchase. This offer is valid for one month."
   }
 ]

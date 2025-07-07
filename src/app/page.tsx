@@ -1,12 +1,19 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import UserProfileSelector from '@/components/UserProfileCard'
 import { UserProfile } from '@/lib/types'
 import { generatePrompt } from '@/lib/prompts'
 import GeneratedEmailCard from '@/components/GeneratedEmailCard'
+import { useSearchParams } from 'next/navigation';
+import userProfiles from '@/lib/userProfiles.json';
+import campaignTemplates from '@/agent/campaignTemplates.json';
 
 export default function Home() {
+  const searchParams = useSearchParams();
+  const userParam = searchParams.get('user');
+  const templateParam = searchParams.get('template');
+
   const [promptText, setPromptText] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null)
@@ -28,6 +35,18 @@ export default function Home() {
     }, 2000)
   }
   console.log('Generated Prompt:', promptText)
+
+  useEffect(() => {
+    if (userParam && templateParam) {
+      const profiles: { label: string; profile: UserProfile }[] = userProfiles as any;
+      const user = profiles.find(p => p.profile.name === userParam)?.profile;
+      if (user) {
+        // scene为template id
+        handleGenerate(user, templateParam);
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">

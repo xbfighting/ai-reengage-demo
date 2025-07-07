@@ -73,33 +73,6 @@ export default function UserProfileSelectorWithAction({
 
   return (
     <div className="bg-white rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-200 p-8 flex flex-col gap-8 items-start">
-      {/* Selection Area: Dropdown + Button in the same row */}
-      <div className="flex flex-col md:flex-row items-center gap-4 w-full mb-4">
-        <select
-          value={selectedProfileIdx}
-          onChange={e => setSelectedProfileIdx(Number(e.target.value))}
-          className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[160px]"
-        >
-          {templates.map((t, idx) => (
-            <option key={idx} value={idx}>{t.label}</option>
-          ))}
-        </select>
-        <select
-          value={scene}
-          onChange={e => setScene(e.target.value as typeof scene)}
-          className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[200px]"
-        >
-          <option value="Repurchase Reminder">Repurchase Reminder</option>
-          <option value="New Product Recommendation">New Product Recommendation</option>
-          <option value="Holiday Greeting">Holiday Greeting</option>
-        </select>
-        <button
-          onClick={() => onGenerate(profile, scene)}
-          className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-2 rounded-xl font-semibold shadow-lg transition text-lg whitespace-nowrap"
-        >
-          Generate Email
-        </button>
-      </div>
       {/* Profile Display Area */}
       <div className="flex flex-col md:flex-row gap-8 w-full items-start">
         <div className="flex-1 flex flex-col items-center w-full">
