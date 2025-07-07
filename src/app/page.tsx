@@ -52,11 +52,22 @@ export default function LangchainWorkflow() {
     setTemplateVars((vars) => ({ ...vars, [key]: value }))
   }
 
+  // Utility: Shuffle array
+  function shuffleArray<T>(array: T[]): T[] {
+    const arr = [...array]
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+    }
+    return arr
+  }
+
   async function handleSubmit() {
     setLoading(true)
     // Simulate loading user list (mock, could be API call)
     setTimeout(() => {
-      setUserList((userProfiles as { label: string; profile: UserProfile }[]).map((u) => u.profile))
+      const users = (userProfiles as { label: string; profile: UserProfile }[]).map((u) => u.profile)
+      setUserList(shuffleArray(users))
       setLoading(false)
     }, 1000)
   }
@@ -96,101 +107,150 @@ export default function LangchainWorkflow() {
   }, [selectedTemplateId])
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
-      <div className="flex flex-col items-center max-w-4xl mx-auto gap-8">
-        <div className="w-full bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col gap-4">
-          <h3 className="font-bold text-blue-700 mb-2">Select Marketing Template</h3>
-          <select
-            value={selectedTemplateId}
-            onChange={(e) => {
-              setSelectedTemplateId(e.target.value)
-              setTemplateVars({})
-            }}
-            className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[220px]"
-          >
-            {campaignTemplates.map((t) => (
-              <option key={t.id} value={t.id}>
-                {t.title}
-              </option>
-            ))}
-          </select>
-          {selectedTemplate && (
-            <div className="text-gray-700 bg-blue-50 border border-blue-100 rounded p-3 mb-2">
-              <span className="font-semibold">Description: </span>{selectedTemplate.description}
-            </div>
-          )}
-          {variableNames.length > 0 && (
-            <div className="mt-4 flex flex-wrap gap-4">
-              {variableNames
-                .filter((v) => v !== 'name')
-                .map((varName) => (
-                  <div key={varName} className="flex flex-col">
-                    <label className="text-sm font-semibold text-gray-700 mb-1">{varName}:</label>
-                    <input
-                      type="text"
-                      value={templateVars[varName] ?? ''}
-                      onChange={(e) => handleVarChange(varName, e.target.value)}
-                      placeholder={getPlaceholder(varName)}
-                      className="border border-gray-300 rounded px-2 py-1"
-                    />
-                  </div>
+    <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#e0e7ef] to-[#f0f4ff] p-3">
+      <div className="flex flex-col gap-10 max-w-[86vw] 2xl:max-w-[1600px] mx-auto">
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          {/* Left: Template Selection */}
+          <div className="md:w-[420px] w-full flex-shrink-0 flex flex-col gap-8 sticky top-8 z-10">
+            <div className="w-full bg-white/90 backdrop-blur border border-blue-200 rounded-2xl shadow-2xl p-8 flex flex-col gap-6 relative overflow-hidden">
+              <div className="absolute -top-8 -right-8 opacity-10 pointer-events-none select-none">
+                <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="90" cy="90" r="80" stroke="#2563eb" strokeWidth="8" fill="none" />
+                  <circle cx="90" cy="90" r="60" stroke="#38bdf8" strokeWidth="4" fill="none" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-2xl text-blue-800 mb-2 tracking-wide flex items-center gap-2">
+                <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">🧠</span>
+                Select Marketing Template
+              </h3>
+              <select
+                value={selectedTemplateId}
+                onChange={(e) => {
+                  setSelectedTemplateId(e.target.value)
+                  setTemplateVars({})
+                }}
+                className="border border-blue-300 rounded-lg px-4 py-2 bg-blue-50 focus:ring-2 focus:ring-blue-400 focus:outline-none min-w-[220px] text-blue-900 font-semibold shadow"
+              >
+                {campaignTemplates.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.title}
+                  </option>
                 ))}
-            </div>
-          )}
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl font-semibold shadow-lg transition text-lg mt-6 w-full"
-            disabled={loading}
-          >
-            {loading ? 'Loading Users...' : 'Load User List'}
-          </button>
-        </div>
-        {/* User List Table */}
-        {userList && (
-          <div className="w-full bg-white border border-gray-200 rounded-xl shadow p-6">
-            <h3 className="font-bold text-blue-700 mb-4">User List</h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full text-sm text-left">
-                <thead>
-                  <tr>
-                    <th className="px-2 py-1">Name</th>
-                    <th className="px-2 py-1">Age</th>
-                    <th className="px-2 py-1">Gender</th>
-                    <th className="px-2 py-1">Traits</th>
-                    <th className="px-2 py-1">Lifestyle</th>
-                    <th className="px-2 py-1">Beauty Goals</th>
-                    <th className="px-2 py-1">Loyalty</th>
-                    <th className="px-2 py-1">AI Preview</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {userList.map((u, idx) => (
-                    <tr key={idx} className="border-t">
-                      <td className="px-2 py-1">{u.name}</td>
-                      <td className="px-2 py-1">{u.age}</td>
-                      <td className="px-2 py-1">{u.gender}</td>
-                      <td className="px-2 py-1">{u.traits.join(', ')}</td>
-                      <td className="px-2 py-1">{u.lifestyle?.join(', ')}</td>
-                      <td className="px-2 py-1">{u.beautyGoals?.join(', ')}</td>
-                      <td className="px-2 py-1">{u.loyaltyScore ?? 'N/A'}</td>
-                      <td className="px-2 py-1">
-                        <button
-                          className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-semibold"
-                          onClick={() => {
-                            const params = new URLSearchParams({ user: u.name, template: selectedTemplateId })
-                            router.push('/ai-marketing-preview?' + params.toString())
-                          }}
-                        >
-                          AI Preview
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              </select>
+              {selectedTemplate && (
+                <div className="text-blue-900 bg-blue-50 border border-blue-200 rounded-xl p-4 mb-2 shadow-sm">
+                  <span className="font-semibold">Description: </span>{selectedTemplate.description}
+                </div>
+              )}
+              {variableNames.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-6">
+                  {variableNames
+                    .filter((v) => v !== 'name')
+                    .map((varName) => (
+                      <div key={varName} className="flex flex-col min-w-[180px]">
+                        <label className="text-sm font-semibold text-blue-700 mb-1 tracking-wide">{varName}:</label>
+                        <input
+                          type="text"
+                          value={templateVars[varName] ?? ''}
+                          onChange={(e) => handleVarChange(varName, e.target.value)}
+                          placeholder={getPlaceholder(varName)}
+                          className="border border-blue-200 rounded px-3 py-2 bg-white focus:ring-2 focus:ring-blue-300 focus:outline-none text-blue-900 font-medium shadow"
+                        />
+                      </div>
+                    ))}
+                </div>
+              )}
+              <button
+                onClick={handleSubmit}
+                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-3 rounded-2xl font-bold shadow-xl transition text-lg mt-8 w-full tracking-wider flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="animate-spin inline-block mr-2">⚡</span>Loading Users...
+                  </>
+                ) : (
+                  <>
+                    <span className="inline-block">🚀</span>Load User List
+                  </>
+                )}
+              </button>
             </div>
           </div>
-        )}
+          {/* Right: User List Table or Placeholder/Loading */}
+          <div className="flex-1 w-full min-w-0 flex flex-col gap-8">
+            {!userList && !loading && (
+              <div className="w-full h-[420px] flex flex-col items-center justify-center bg-white/80 border border-blue-100 rounded-2xl shadow-xl">
+                <div className="text-5xl mb-4 text-blue-200">👥</div>
+                <div className="text-lg text-blue-400 font-semibold mb-2">User List will appear here</div>
+                <div className="text-blue-300">Please select a template and load users to preview the list.</div>
+              </div>
+            )}
+            {loading && (
+              <div className="w-full h-[420px] flex flex-col items-center justify-center bg-white/80 border border-blue-100 rounded-2xl shadow-xl animate-pulse">
+                <svg className="animate-spin mb-6" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="20" stroke="#60a5fa" strokeWidth="6" opacity="0.2" />
+                  <path d="M44 24a20 20 0 0 0-20-20" stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />
+                </svg>
+                <div className="text-lg text-blue-400 font-semibold">Loading user list...</div>
+              </div>
+            )}
+            {userList && !loading && (
+              <div className="w-full bg-white/90 backdrop-blur border border-blue-200 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
+                <div className="absolute -bottom-8 -left-8 opacity-10 pointer-events-none select-none">
+                  <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="90" cy="90" r="80" stroke="#2563eb" strokeWidth="8" fill="none" />
+                    <circle cx="90" cy="90" r="60" stroke="#38bdf8" strokeWidth="4" fill="none" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-2xl text-blue-800 mb-6 tracking-wide flex items-center gap-2">
+                  <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">👥</span>
+                  User List
+                </h3>
+                <div className="overflow-x-auto rounded-xl">
+                  <table className="min-w-full text-sm text-left bg-white rounded-xl overflow-hidden shadow">
+                    <thead className="bg-blue-50 text-blue-700">
+                      <tr>
+                        <th className="px-4 py-2">Name</th>
+                        <th className="px-4 py-2">Age</th>
+                        <th className="px-4 py-2">Gender</th>
+                        <th className="px-4 py-2">Traits</th>
+                        <th className="px-4 py-2">Lifestyle</th>
+                        <th className="px-4 py-2">Beauty Goals</th>
+                        <th className="px-4 py-2">Loyalty</th>
+                        <th className="px-4 py-2">AI Preview</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {userList.map((u, idx) => (
+                        <tr key={idx} className="border-t border-blue-100 hover:bg-blue-50 transition">
+                          <td className="px-4 py-2 font-semibold text-blue-900">{u.name}</td>
+                          <td className="px-4 py-2 text-blue-800">{u.age}</td>
+                          <td className="px-4 py-2 text-blue-800">{u.gender}</td>
+                          <td className="px-4 py-2 text-blue-700">{u.traits.join(', ')}</td>
+                          <td className="px-4 py-2 text-blue-700">{u.lifestyle?.join(', ')}</td>
+                          <td className="px-4 py-2 text-blue-700">{u.beautyGoals?.join(', ')}</td>
+                          <td className="px-4 py-2 text-blue-700">{u.loyaltyScore ?? 'N/A'}</td>
+                          <td className="px-4 py-2">
+                            <button
+                              className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow transition"
+                              onClick={() => {
+                                const params = new URLSearchParams({ user: u.name, template: selectedTemplateId })
+                                router.push('/ai-marketing-preview?' + params.toString())
+                              }}
+                            >
+                              AI Preview
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </main>
   )
