@@ -1,20 +1,21 @@
 [
   {
-    "id": "Holiday Greeting",
-    "title": "Holiday Greeting + Discount Offer",
-    "description": "For high-value customers, send greetings and discounts during holidays",
-    "template": "Dear ${name}, Happy ${holidayName}! Thank you for spending over ${minSpend} dollars in the past. We are pleased to offer you an exclusive ${discount}% discount on our facelift services. Don't miss this opportunity, valid for two weeks only."
+    "id": "holiday_greeting",
+    "title": "Holiday Greeting",
+    "description": "Holiday greeting + emotional connection + discount guidance, suitable for all reachable users.",
+    "template": "Dear ${name}, happy ${holidayName}! On this special day, we thank you for your continued support and trust. As a distinguished customer from ${location}, you are invited to enjoy a ${discount} off on ${primaryProcedure}. Offer valid until ${validUntil}. We look forward to seeing you again!"
   },
   {
-    "id": "New Product Recommendation",
-    "title": "New Product Recommendation + Discount Offer for Loyal Customers",
-    "description": "For loyal customers, recommend new products and offer discounts",
-    "template": "Dear ${name}, we are excited to introduce our new ${productName} product, which is perfect for your ${beautyGoal}. As a loyal customer, you can enjoy a ${discount}% discount on your next purchase. This offer is valid for one month."
+    "id": "repurchase_reminder",
+    "title": "Repurchase Reminder",
+    "description": "After a period post-surgery, remind users to repurchase and maintain results. Suitable for customers with repurchase potential.",
+    "template": "Hello ${name}, it has been ${monthsSince} months since your last ${lastProcedure}. To help you maintain the best results, we have reserved a limited-time ${discount} off repurchase offer for ${primaryProcedure}. If you are still in ${location}, feel free to visit us again for an upgraded experience."
   },
   {
-    "id": "Repurchase Reminder",
-    "title": "Repurchase Reminder + Discount Offer for Loyal Customers",
-    "description": "For loyal customers, remind them to repurchase and offer discounts",
-    "template": "Dear ${name}, we noticed that you enjoyed our ${lastProductName} product. As a token of our appreciation, we would like to offer you a ${discount}% discount on your next purchase. This offer is valid for one month."
+    "id": "new_product_recommendation",
+    "title": "New Product Recommendation",
+    "description": "Recommend new products to curious and novelty-seeking users to increase trial rates.",
+    "template": "Hi ${name}, we have just launched a brand new service: ${newProductName}! Based on your previous preferences (${primaryProcedure}) and referral source (${referralSource}), we invite you to be among the first to try it out and enjoy a special trial price of ${trialDiscount} off. Feel free to contact us for more information!"
   }
 ]
+

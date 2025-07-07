@@ -50,23 +50,23 @@ export default function GeneratedEmailCard(
       <div className="generated-email-content">
         {(() => {
           switch (currentUser?.name + scene) {
-            case 'AnnaHoliday Greeting':
+            case 'Annaholiday_greeting':
               return <AnanHoliday />
-            case 'MikeHoliday Greeting':
+            case 'Mikeholiday_greeting':
               return <MickHoliday />
-            case 'LindaHoliday Greeting':
+            case 'Lindaholiday_greeting':
               return <LindaHoliday />
-            case 'AnnaNew Product Recommendation':
+            case 'Annanew_product_recommendation':
               return <AnnaPR />
-            case 'MikeNew Product Recommendation':
+            case 'Mikenew_product_recommendation':
               return <MickPR />
-            case 'LindaNew Product Recommendation':
+            case 'Lindanew_product_recommendation':
               return <LindaPR />
-            case 'AnnaRepurchase Reminder':
+            case 'Annarepurchase_reminder':
               return <AnnaRR />
-            case 'MikeRepurchase Reminder':
+            case 'Mikerepurchase_reminder':
               return <MickRR />
-            case 'LindaRepurchase Reminder':
+            case 'Lindarepurchase_reminder':
               return <LindaRR />
             default:
               return null

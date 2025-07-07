@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import userProfiles from '@/lib/userProfiles.json'
 import campaignTemplates from '@/agent/campaignTemplates.json'
 import { UserProfile } from '@/lib/types'
@@ -25,14 +25,24 @@ export default function LangchainWorkflow() {
     switch (varName) {
       case 'holidayName':
         return 'e.g. Christmas'
-      case 'minSpend':
-        return 'e.g. 500'
       case 'discount':
         return 'e.g. 20'
       case 'monthsSince':
         return 'e.g. 12'
       case 'lastProcedure':
         return 'e.g. Facelift'
+      case 'primaryProcedure':
+        return 'e.g. Botox'
+      case 'validUntil':
+        return 'e.g. 2025-12-31'
+      case 'location':
+        return 'e.g. Merritt Island'
+      case 'newProductName':
+        return 'e.g. Laser Resurfacing'
+      case 'referralSource':
+        return 'e.g. Friend'
+      case 'trialDiscount':
+        return 'e.g. 30'
       default:
         return `Enter ${varName}`
     }
@@ -50,6 +60,40 @@ export default function LangchainWorkflow() {
       setLoading(false)
     }, 1000)
   }
+
+  // Set default values for templateVars when template or variableNames change
+  useEffect(() => {
+    if (selectedTemplate && variableNames.length > 0) {
+      const defaults: Record<string, string> = {}
+      variableNames.forEach((v) => {
+        switch (v) {
+          case 'holidayName':
+            defaults[v] = 'Christmas'; break;
+          case 'discount':
+            defaults[v] = '20'; break;
+          case 'monthsSince':
+            defaults[v] = '12'; break;
+          case 'lastProcedure':
+            defaults[v] = 'Facelift'; break;
+          case 'primaryProcedure':
+            defaults[v] = 'Botox'; break;
+          case 'validUntil':
+            defaults[v] = '2025-12-31'; break;
+          case 'location':
+            defaults[v] = 'Merritt Island'; break;
+          case 'newProductName':
+            defaults[v] = 'Laser Resurfacing'; break;
+          case 'referralSource':
+            defaults[v] = 'Friend'; break;
+          case 'trialDiscount':
+            defaults[v] = '30'; break;
+          default:
+            defaults[v] = ''
+        }
+      })
+      setTemplateVars(defaults)
+    }
+  }, [selectedTemplateId])
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
@@ -70,6 +114,11 @@ export default function LangchainWorkflow() {
               </option>
             ))}
           </select>
+          {selectedTemplate && (
+            <div className="text-gray-700 bg-blue-50 border border-blue-100 rounded p-3 mb-2">
+              <span className="font-semibold">Description: </span>{selectedTemplate.description}
+            </div>
+          )}
           {variableNames.length > 0 && (
             <div className="mt-4 flex flex-wrap gap-4">
               {variableNames
