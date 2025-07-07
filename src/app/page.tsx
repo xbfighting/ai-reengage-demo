@@ -1,94 +1,147 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from 'react'
-import UserProfileSelector from '@/components/UserProfileCard'
+import { useState } from 'react'
+import userProfiles from '@/lib/userProfiles.json'
+import campaignTemplates from '@/agent/campaignTemplates.json'
 import { UserProfile } from '@/lib/types'
-import { generatePrompt } from '@/lib/prompts'
-import GeneratedEmailCard from '@/components/GeneratedEmailCard'
-import { useSearchParams } from 'next/navigation';
-import userProfiles from '@/lib/userProfiles.json';
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
-  const searchParams = useSearchParams();
-  const userParam = searchParams.get('user');
-  const templateParam = searchParams.get('template');
-
-  const [promptText, setPromptText] = useState<string | null>(null)
+export default function LangchainWorkflow() {
+  const [selectedTemplateId, setSelectedTemplateId] = useState(campaignTemplates[0].id)
+  const [templateVars, setTemplateVars] = useState<Record<string, string | number>>({})
+  const [userList, setUserList] = useState<UserProfile[] | null>(null)
   const [loading, setLoading] = useState(false)
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null)
-  const [scene, setScene] = useState<string>('holiday')
-  const [showEmail, setShowEmail] = useState(false)
-  const [showPrompt, setShowPrompt] = useState(false) // New state for controlling prompt visibility
+  const router = useRouter()
 
-  // Mock email generation (searching JSON based on name and scene)
-  const handleGenerate = async (userProfile: UserProfile, scene: string) => {
-    setLoading(true)
-    setShowEmail(false)
-    const prompt = generatePrompt(userProfile, scene)
-    setPromptText(JSON.stringify(prompt))
-    setCurrentUser(userProfile)
-    setScene(scene)
-    setTimeout(() => {
-      setLoading(false)
-      setShowEmail(true)
-    }, 2000)
+  const selectedTemplate = campaignTemplates.find((t) => t.id === selectedTemplateId)
+
+  function extractVars(template: string) {
+    const matches = template.match(/\$\{(.*?)\}/g) || []
+    return Array.from(new Set(matches.map((m) => m.slice(2, -1).trim())))
   }
-  console.log('Generated Prompt:', promptText)
+  const variableNames = selectedTemplate ? extractVars(selectedTemplate.template) : []
 
-  useEffect(() => {
-    if (userParam && templateParam) {
-      const profiles: { label: string; profile: UserProfile }[] = userProfiles as { label: string; profile: UserProfile }[];
-      const user = profiles.find(p => p.profile.name === userParam)?.profile;
-      if (user) {
-        // scene为template id
-        handleGenerate(user, templateParam);
-      }
+  function getPlaceholder(varName: string): string {
+    switch (varName) {
+      case 'holidayName':
+        return 'e.g. Christmas'
+      case 'minSpend':
+        return 'e.g. 500'
+      case 'discount':
+        return 'e.g. 20'
+      case 'monthsSince':
+        return 'e.g. 12'
+      case 'lastProcedure':
+        return 'e.g. Facelift'
+      default:
+        return `Enter ${varName}`
     }
-    // eslint-disable-next-line
-  }, []);
+  }
+
+  function handleVarChange(key: string, value: string) {
+    setTemplateVars((vars) => ({ ...vars, [key]: value }))
+  }
+
+  async function handleSubmit() {
+    setLoading(true)
+    // Simulate loading user list (mock, could be API call)
+    setTimeout(() => {
+      setUserList((userProfiles as { label: string; profile: UserProfile }[]).map((u) => u.profile))
+      setLoading(false)
+    }, 1000)
+  }
 
   return (
     <main className="min-h-screen bg-gray-100 p-6">
-      <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
-        {/* Left: User Information */}
-        <div className="md:w-1/2 w-full">
-          {userParam ? (
-            <UserProfileSelector username={userParam} />
-          ) : (
-            <div className="text-gray-400">No user selected.</div>
+      <div className="flex flex-col items-center max-w-4xl mx-auto gap-8">
+        <div className="w-full bg-white border border-gray-200 rounded-xl shadow p-6 flex flex-col gap-4">
+          <h3 className="font-bold text-blue-700 mb-2">Select Marketing Template</h3>
+          <select
+            value={selectedTemplateId}
+            onChange={(e) => {
+              setSelectedTemplateId(e.target.value)
+              setTemplateVars({})
+            }}
+            className="border border-gray-300 rounded-lg px-3 py-2 bg-gray-50 focus:ring-2 focus:ring-blue-200 focus:outline-none min-w-[220px]"
+          >
+            {campaignTemplates.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.title}
+              </option>
+            ))}
+          </select>
+          {variableNames.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-4">
+              {variableNames
+                .filter((v) => v !== 'name')
+                .map((varName) => (
+                  <div key={varName} className="flex flex-col">
+                    <label className="text-sm font-semibold text-gray-700 mb-1">{varName}:</label>
+                    <input
+                      type="text"
+                      value={templateVars[varName] ?? ''}
+                      onChange={(e) => handleVarChange(varName, e.target.value)}
+                      placeholder={getPlaceholder(varName)}
+                      className="border border-gray-300 rounded px-2 py-1"
+                    />
+                  </div>
+                ))}
+            </div>
           )}
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl font-semibold shadow-lg transition text-lg mt-6 w-full"
+            disabled={loading}
+          >
+            {loading ? 'Loading Users...' : 'Load User List'}
+          </button>
         </div>
-        {/* Right: Prompt + Email in a vertical structure */}
-        <div className="md:w-1/2 w-full flex flex-col gap-6 justify-start">
-          {/* 邮件卡片站位元素 */}
-          {!loading && !showEmail && (
-            <div className="h-72 bg-white rounded-xl shadow flex items-center justify-center text-gray-300 text-lg border border-dashed border-gray-200">
-              Email content will appear here
+        {/* User List Table */}
+        {userList && (
+          <div className="w-full bg-white border border-gray-200 rounded-xl shadow p-6">
+            <h3 className="font-bold text-blue-700 mb-4">User List</h3>
+            <div className="overflow-x-auto">
+              <table className="min-w-full text-sm text-left">
+                <thead>
+                  <tr>
+                    <th className="px-2 py-1">Name</th>
+                    <th className="px-2 py-1">Age</th>
+                    <th className="px-2 py-1">Gender</th>
+                    <th className="px-2 py-1">Traits</th>
+                    <th className="px-2 py-1">Lifestyle</th>
+                    <th className="px-2 py-1">Beauty Goals</th>
+                    <th className="px-2 py-1">Loyalty</th>
+                    <th className="px-2 py-1">AI Preview</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {userList.map((u, idx) => (
+                    <tr key={idx} className="border-t">
+                      <td className="px-2 py-1">{u.name}</td>
+                      <td className="px-2 py-1">{u.age}</td>
+                      <td className="px-2 py-1">{u.gender}</td>
+                      <td className="px-2 py-1">{u.traits.join(', ')}</td>
+                      <td className="px-2 py-1">{u.lifestyle?.join(', ')}</td>
+                      <td className="px-2 py-1">{u.beautyGoals?.join(', ')}</td>
+                      <td className="px-2 py-1">{u.loyaltyScore ?? 'N/A'}</td>
+                      <td className="px-2 py-1">
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-semibold"
+                          onClick={() => {
+                            const params = new URLSearchParams({ user: u.name, template: selectedTemplateId })
+                            router.push('/ai-marketing-preview?' + params.toString())
+                          }}
+                        >
+                          AI Preview
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-          )}
-          {loading && (
-            <div className="flex items-center justify-center h-72 bg-white rounded-xl shadow text-blue-600 text-lg font-semibold animate-pulse">
-              Generating email...
-            </div>
-          )}
-          {showEmail && !loading && <GeneratedEmailCard currentUser={currentUser} scene={scene} />}
-          {promptText && (
-            <div className="bg-yellow-50 rounded shadow p-4 text-sm">
-              <h3
-                className="font-bold mb-2 cursor-pointer flex items-center justify-between"
-                onClick={() => setShowPrompt((prev) => !prev)}
-              >
-                Prompt for Debugging:
-                <span className="text-blue-500">{showPrompt ? 'Collapse' : 'Expand'}</span>
-              </h3>
-              {showPrompt && (
-                <pre className="whitespace-pre-wrap bg-gray-100 p-2 rounded border border-gray-300 overflow-auto">
-                  {JSON.stringify(JSON.parse(promptText), null, 2)}
-                </pre>
-              )}
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </main>
   )
