@@ -53,7 +53,11 @@ export default function Home() {
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
         {/* Left: User Information */}
         <div className="md:w-1/2 w-full">
-          <UserProfileSelector onGenerate={handleGenerate} />
+          {userParam ? (
+            <UserProfileSelector username={userParam} />
+          ) : (
+            <div className="text-gray-400">No user selected.</div>
+          )}
         </div>
         {/* Right: Prompt + Email in a vertical structure */}
         <div className="md:w-1/2 w-full flex flex-col gap-6 justify-start">
