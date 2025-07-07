@@ -127,9 +127,6 @@ export default function LangchainWorkflow() {
                 </svg>
               </div>
               <h3 className="font-bold text-2xl text-blue-800 mb-2 tracking-wide flex items-center gap-2">
-                <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">
-                  🧠
-                </span>
                 Select Marketing Template
               </h3>
               <select
@@ -193,7 +190,11 @@ export default function LangchainWorkflow() {
           <div className="flex-1 w-full min-w-0 flex flex-col gap-8">
             {!userList && !loading && (
               <div className="w-full h-[420px] flex flex-col items-center justify-center bg-white/80 border border-blue-100 rounded-2xl shadow-xl">
-                <div className="text-5xl mb-4 text-blue-200">👥</div>
+                <div className="text-5xl mb-4 text-blue-200 flex items-center justify-center">
+                  <span className="inline-block align-middle" style={{ lineHeight: 1 }}>
+                    👥
+                  </span>
+                </div>
                 <div className="text-lg text-blue-400 font-semibold mb-2">User List will appear here</div>
                 <div className="text-blue-300">
                   Please select a template and load users to preview the list.
@@ -232,10 +233,7 @@ export default function LangchainWorkflow() {
                 </div>
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="font-bold text-2xl text-blue-800 tracking-wide flex items-center gap-2 m-0">
-                    <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">
-                      👥
-                    </span>
-                    User List
+                    Audience (AI-Generated Profiles)
                   </h3>
                   <button
                     className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-5 py-2 rounded-xl font-bold shadow transition text-base"

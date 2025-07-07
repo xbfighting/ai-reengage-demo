@@ -50,7 +50,14 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6">
+    <main className="min-h-screen bg-gray-100 p-6 relative">
+      <button
+        onClick={() => window.close()}
+        className="fixed top-4 right-4 z-50 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-bold px-4 py-2 rounded-full shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+        title="Close this tab"
+      >
+        ✕ Close
+      </button>
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
         {/* Left: User Information */}
         <div className="md:w-1/2 w-full">

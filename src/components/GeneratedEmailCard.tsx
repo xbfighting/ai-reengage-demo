@@ -37,7 +37,7 @@ export default function GeneratedEmailCard(
     <div className="bg-white rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-200 p-8 flex flex-col gap-8 items-start">
       <div>
         <div className="flex items-center justify-between w-full mb-4 gap-4">
-          <h2 className="text-2xl font-bold text-blue-700">Generated Marketing Email:</h2>
+          <h2 className="text-2xl font-bold text-blue-700">AI Powered Marketing Email:</h2>
           <button
             onClick={handleCopy}
             className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white text-sm px-4 py-1.5 rounded-xl font-bold shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400"
