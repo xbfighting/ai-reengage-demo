@@ -94,6 +94,7 @@ export default function LangchainWorkflow() {
       })
       setTemplateVars(defaults)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTemplateId])
 
   // Pagination state
@@ -154,7 +155,7 @@ export default function LangchainWorkflow() {
                   {variableNames
                     .filter((v) => v !== 'name')
                     .map((varName) => (
-                      <div key={varName} className="flex flex-col min-w-[180px]">
+                      <div key={varName} className="flex flex-col w-full">
                         <label className="text-sm font-semibold text-blue-700 mb-1 tracking-wide">
                           {varName}:
                         </label>

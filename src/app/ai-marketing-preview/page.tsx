@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import UserProfileSelector from '@/components/UserProfileCard'
 import { UserProfile } from '@/lib/types'
 import { generatePrompt } from '@/lib/prompts'
@@ -8,7 +8,7 @@ import GeneratedEmailCard from '@/components/GeneratedEmailCard'
 import { useSearchParams } from 'next/navigation'
 import userProfiles from '@/lib/userProfiles.json'
 
-export default function Home() {
+function AiMarketingPreviewContent() {
   const searchParams = useSearchParams()
   const userParam = searchParams.get('user')
   const templateParam = searchParams.get('template')
@@ -100,5 +100,13 @@ export default function Home() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-blue-400 text-lg">Loading...</div>}>
+      <AiMarketingPreviewContent />
+    </Suspense>
   )
 }
