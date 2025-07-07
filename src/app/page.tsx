@@ -7,7 +7,6 @@ import { generatePrompt } from '@/lib/prompts'
 import GeneratedEmailCard from '@/components/GeneratedEmailCard'
 import { useSearchParams } from 'next/navigation';
 import userProfiles from '@/lib/userProfiles.json';
-import campaignTemplates from '@/agent/campaignTemplates.json';
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -38,7 +37,7 @@ export default function Home() {
 
   useEffect(() => {
     if (userParam && templateParam) {
-      const profiles: { label: string; profile: UserProfile }[] = userProfiles as any;
+      const profiles: { label: string; profile: UserProfile }[] = userProfiles as { label: string; profile: UserProfile }[];
       const user = profiles.find(p => p.profile.name === userParam)?.profile;
       if (user) {
         // scene为template id
