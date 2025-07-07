@@ -52,22 +52,12 @@ export default function LangchainWorkflow() {
     setTemplateVars((vars) => ({ ...vars, [key]: value }))
   }
 
-  // Utility: Shuffle array
-  function shuffleArray<T>(array: T[]): T[] {
-    const arr = [...array]
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[arr[i], arr[j]] = [arr[j], arr[i]]
-    }
-    return arr
-  }
-
   async function handleSubmit() {
     setLoading(true)
     // Simulate loading user list (mock, could be API call)
     setTimeout(() => {
       const users = (userProfiles as { label: string; profile: UserProfile }[]).map((u) => u.profile)
-      setUserList(shuffleArray(users))
+      setUserList(users)
       setLoading(false)
     }, 1000)
   }
@@ -105,6 +95,17 @@ export default function LangchainWorkflow() {
       setTemplateVars(defaults)
     }
   }, [selectedTemplateId])
+
+  // Pagination state
+  const PAGE_SIZE = 10;
+  const [page, setPage] = useState(1);
+  const pagedUserList = userList ? userList.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE) : [];
+  const totalPages = userList ? Math.ceil(userList.length / PAGE_SIZE) : 1;
+
+  // Reset to page 1 when userList changes
+  useEffect(() => {
+    setPage(1);
+  }, [userList]);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f8fafc] via-[#e0e7ef] to-[#f0f4ff] p-3">
@@ -222,7 +223,7 @@ export default function LangchainWorkflow() {
                       </tr>
                     </thead>
                     <tbody>
-                      {userList.map((u, idx) => (
+                      {pagedUserList.map((u, idx) => (
                         <tr key={idx} className="border-t border-blue-100 hover:bg-blue-50 transition">
                           <td className="px-4 py-2 font-semibold text-blue-900">{u.name}</td>
                           <td className="px-4 py-2 text-blue-800">{u.age}</td>
@@ -247,6 +248,26 @@ export default function LangchainWorkflow() {
                     </tbody>
                   </table>
                 </div>
+                {/* Pagination Controls */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center gap-2 mt-6">
+                    <button
+                      className="px-3 py-1 rounded bg-blue-100 text-blue-700 font-semibold disabled:opacity-50"
+                      onClick={() => setPage(page - 1)}
+                      disabled={page === 1}
+                    >
+                      Prev
+                    </button>
+                    <span className="mx-2 text-blue-700 font-medium">Page {page} of {totalPages}</span>
+                    <button
+                      className="px-3 py-1 rounded bg-blue-100 text-blue-700 font-semibold disabled:opacity-50"
+                      onClick={() => setPage(page + 1)}
+                      disabled={page === totalPages}
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

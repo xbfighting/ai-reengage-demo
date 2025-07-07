@@ -56,5 +56,575 @@
       "locationLevel": "New Tier 1",
       "loyaltyScore": 75
     }
+  },
+  {
+    "label": "Linda (Variant 1)",
+    "profile": {
+      "name": "Linda",
+      "age": 41,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Active", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2021-05-10" }
+      ],
+      "lifestyle": ["Yoga lover", "Prefers natural look"],
+      "spendingLevel": 62,
+      "beautyGoals": ["Anti-aging"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 53,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 64
+    }
+  },
+  {
+    "label": "Linda (Variant 2)",
+    "profile": {
+      "name": "Linda",
+      "age": 42,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Calm", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2022-06-15" }
+      ],
+      "lifestyle": ["Runner", "Prefers natural look"],
+      "spendingLevel": 64,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 56,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 66
+    }
+  },
+  {
+    "label": "Linda (Variant 3)",
+    "profile": {
+      "name": "Linda",
+      "age": 43,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Active", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2020-04-20" }
+      ],
+      "lifestyle": ["Yoga lover", "Prefers natural look"],
+      "spendingLevel": 66,
+      "beautyGoals": ["Anti-aging"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 59,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 68
+    }
+  },
+  {
+    "label": "Linda (Variant 4)",
+    "profile": {
+      "name": "Linda",
+      "age": 44,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Calm", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2021-03-10" }
+      ],
+      "lifestyle": ["Runner", "Prefers natural look"],
+      "spendingLevel": 68,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 62,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 70
+    }
+  },
+  {
+    "label": "Linda (Variant 5)",
+    "profile": {
+      "name": "Linda",
+      "age": 45,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Active", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2019-02-15" }
+      ],
+      "lifestyle": ["Yoga lover", "Prefers natural look"],
+      "spendingLevel": 70,
+      "beautyGoals": ["Anti-aging"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 65,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 72
+    }
+  },
+  {
+    "label": "Linda (Variant 6)",
+    "profile": {
+      "name": "Linda",
+      "age": 46,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Calm", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2020-01-10" }
+      ],
+      "lifestyle": ["Runner", "Prefers natural look"],
+      "spendingLevel": 72,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 68,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 74
+    }
+  },
+  {
+    "label": "Linda (Variant 7)",
+    "profile": {
+      "name": "Linda",
+      "age": 47,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Active", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2018-12-15" }
+      ],
+      "lifestyle": ["Yoga lover", "Prefers natural look"],
+      "spendingLevel": 74,
+      "beautyGoals": ["Anti-aging"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 70,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 76
+    }
+  },
+  {
+    "label": "Linda (Variant 8)",
+    "profile": {
+      "name": "Linda",
+      "age": 48,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Calm", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2019-11-10" }
+      ],
+      "lifestyle": ["Runner", "Prefers natural look"],
+      "spendingLevel": 76,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 73,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 78
+    }
+  },
+  {
+    "label": "Linda (Variant 9)",
+    "profile": {
+      "name": "Linda",
+      "age": 49,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Active", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Facelift", "date": "2018-10-10" }
+      ],
+      "lifestyle": ["Yoga lover", "Prefers natural look"],
+      "spendingLevel": 78,
+      "beautyGoals": ["Anti-aging"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 75,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 80
+    }
+  },
+  {
+    "label": "Linda (Variant 10)",
+    "profile": {
+      "name": "Linda",
+      "age": 50,
+      "gender": "Female",
+      "traits": ["Likes bargains", "Calm", "Competitive nature"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2018-09-10" }
+      ],
+      "lifestyle": ["Runner", "Prefers natural look"],
+      "spendingLevel": 80,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 78,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 82
+    }
+  },
+  {
+    "label": "Mike (Variant 1)",
+    "profile": {
+      "name": "Mike",
+      "age": 30,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2022-05-20" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 63,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 53,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 63
+    }
+  },
+  {
+    "label": "Mike (Variant 2)",
+    "profile": {
+      "name": "Mike",
+      "age": 31,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Creative", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2023-06-15" }
+      ],
+      "lifestyle": ["Remote worker", "Values privacy"],
+      "spendingLevel": 66,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 56,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 66
+    }
+  },
+  {
+    "label": "Mike (Variant 3)",
+    "profile": {
+      "name": "Mike",
+      "age": 32,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2021-05-20" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 69,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 59,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 69
+    }
+  },
+  {
+    "label": "Mike (Variant 4)",
+    "profile": {
+      "name": "Mike",
+      "age": 33,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Creative", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2022-04-10" }
+      ],
+      "lifestyle": ["Remote worker", "Values privacy"],
+      "spendingLevel": 72,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 62,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 72
+    }
+  },
+  {
+    "label": "Mike (Variant 5)",
+    "profile": {
+      "name": "Mike",
+      "age": 34,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2020-03-15" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 75,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 65,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 75
+    }
+  },
+  {
+    "label": "Mike (Variant 6)",
+    "profile": {
+      "name": "Mike",
+      "age": 35,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Creative", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2021-02-10" }
+      ],
+      "lifestyle": ["Remote worker", "Values privacy"],
+      "spendingLevel": 78,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 68,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 78
+    }
+  },
+  {
+    "label": "Mike (Variant 7)",
+    "profile": {
+      "name": "Mike",
+      "age": 36,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2019-01-15" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 81,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 70,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 81
+    }
+  },
+  {
+    "label": "Mike (Variant 8)",
+    "profile": {
+      "name": "Mike",
+      "age": 37,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Creative", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2018-12-10" }
+      ],
+      "lifestyle": ["Remote worker", "Values privacy"],
+      "spendingLevel": 84,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 73,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 84
+    }
+  },
+  {
+    "label": "Mike (Variant 9)",
+    "profile": {
+      "name": "Mike",
+      "age": 38,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Rational", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Hair Transplant", "date": "2017-11-15" }
+      ],
+      "lifestyle": ["Busy professional", "Values privacy"],
+      "spendingLevel": 87,
+      "beautyGoals": ["Hair restoration"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 75,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 87
+    }
+  },
+  {
+    "label": "Mike (Variant 10)",
+    "profile": {
+      "name": "Mike",
+      "age": 39,
+      "gender": "Male",
+      "traits": ["Efficiency-oriented", "Creative", "Dislikes being disturbed"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2017-10-10" }
+      ],
+      "lifestyle": ["Remote worker", "Values privacy"],
+      "spendingLevel": 90,
+      "beautyGoals": ["Skin care"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 78,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 90
+    }
+  },
+  {
+    "label": "Anna (Variant 1)",
+    "profile": {
+      "name": "Anna",
+      "age": 25,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Fashionable", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2023-08-10" }
+      ],
+      "lifestyle": ["Luxury shopper", "Active on social media"],
+      "spendingLevel": 82,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 75,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 82
+    }
+  },
+  {
+    "label": "Anna (Variant 2)",
+    "profile": {
+      "name": "Anna",
+      "age": 26,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Social", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2023-07-10" }
+      ],
+      "lifestyle": ["Traveler", "Active on social media"],
+      "spendingLevel": 84,
+      "beautyGoals": ["Skin care", "Fashion trends"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 78,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 84
+    }
+  },
+  {
+    "label": "Anna (Variant 3)",
+    "profile": {
+      "name": "Anna",
+      "age": 27,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Fashionable", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2023-06-10" }
+      ],
+      "lifestyle": ["Luxury shopper", "Active on social media"],
+      "spendingLevel": 86,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 80,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 86
+    }
+  },
+  {
+    "label": "Anna (Variant 4)",
+    "profile": {
+      "name": "Anna",
+      "age": 28,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Social", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2023-05-10" }
+      ],
+      "lifestyle": ["Traveler", "Active on social media"],
+      "spendingLevel": 88,
+      "beautyGoals": ["Skin care", "Fashion trends"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 83,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 88
+    }
+  },
+  {
+    "label": "Anna (Variant 5)",
+    "profile": {
+      "name": "Anna",
+      "age": 29,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Fashionable", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2023-04-10" }
+      ],
+      "lifestyle": ["Luxury shopper", "Active on social media"],
+      "spendingLevel": 90,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 85,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 90
+    }
+  },
+  {
+    "label": "Anna (Variant 6)",
+    "profile": {
+      "name": "Anna",
+      "age": 30,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Social", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2023-03-10" }
+      ],
+      "lifestyle": ["Traveler", "Active on social media"],
+      "spendingLevel": 92,
+      "beautyGoals": ["Skin care", "Fashion trends"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 88,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 92
+    }
+  },
+  {
+    "label": "Anna (Variant 7)",
+    "profile": {
+      "name": "Anna",
+      "age": 31,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Fashionable", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2023-02-10" }
+      ],
+      "lifestyle": ["Luxury shopper", "Active on social media"],
+      "spendingLevel": 94,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 90,
+      "locationLevel": "New Tier 1",
+      "loyaltyScore": 94
+    }
+  },
+  {
+    "label": "Anna (Variant 8)",
+    "profile": {
+      "name": "Anna",
+      "age": 32,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Social", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2023-01-10" }
+      ],
+      "lifestyle": ["Traveler", "Active on social media"],
+      "spendingLevel": 96,
+      "beautyGoals": ["Skin care", "Fashion trends"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 93,
+      "locationLevel": "Tier 3",
+      "loyaltyScore": 96
+    }
+  },
+  {
+    "label": "Anna (Variant 9)",
+    "profile": {
+      "name": "Anna",
+      "age": 33,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Fashionable", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Lip Filler", "date": "2022-12-10" }
+      ],
+      "lifestyle": ["Luxury shopper", "Active on social media"],
+      "spendingLevel": 98,
+      "beautyGoals": ["Lip enhancement", "Fashion trends"],
+      "riskPreference": "Adventurous",
+      "appointmentActivity": 95,
+      "locationLevel": "Tier 1",
+      "loyaltyScore": 98
+    }
+  },
+  {
+    "label": "Anna (Variant 10)",
+    "profile": {
+      "name": "Anna",
+      "age": 34,
+      "gender": "Female",
+      "traits": ["Likes trying new things", "Social", "Values word-of-mouth recommendations"],
+      "surgery_history": [
+        { "type": "Botox", "date": "2022-11-10" }
+      ],
+      "lifestyle": ["Traveler", "Active on social media"],
+      "spendingLevel": 100,
+      "beautyGoals": ["Skin care", "Fashion trends"],
+      "riskPreference": "Conservative",
+      "appointmentActivity": 98,
+      "locationLevel": "Tier 2",
+      "loyaltyScore": 100
+    }
   }
 ]
