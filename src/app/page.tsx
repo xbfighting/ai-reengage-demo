@@ -4,14 +4,14 @@ import { useState, useEffect } from 'react'
 import userProfiles from '@/lib/userProfiles.json'
 import campaignTemplates from '@/agent/campaignTemplates.json'
 import { UserProfile } from '@/lib/types'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 
 export default function LangchainWorkflow() {
   const [selectedTemplateId, setSelectedTemplateId] = useState(campaignTemplates[0].id)
   const [templateVars, setTemplateVars] = useState<Record<string, string | number>>({})
   const [userList, setUserList] = useState<UserProfile[] | null>(null)
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  // const router = useRouter()
 
   const selectedTemplate = campaignTemplates.find((t) => t.id === selectedTemplateId)
 
@@ -115,13 +115,21 @@ export default function LangchainWorkflow() {
           <div className="md:w-[420px] w-full flex-shrink-0 flex flex-col gap-8 sticky top-8 z-10">
             <div className="w-full bg-white/90 backdrop-blur border border-blue-200 rounded-2xl shadow-2xl p-8 flex flex-col gap-6 relative overflow-hidden">
               <div className="absolute -top-8 -right-8 opacity-10 pointer-events-none select-none">
-                <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  width="180"
+                  height="180"
+                  viewBox="0 0 180 180"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <circle cx="90" cy="90" r="80" stroke="#2563eb" strokeWidth="8" fill="none" />
                   <circle cx="90" cy="90" r="60" stroke="#38bdf8" strokeWidth="4" fill="none" />
                 </svg>
               </div>
               <h3 className="font-bold text-2xl text-blue-800 mb-2 tracking-wide flex items-center gap-2">
-                <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">🧠</span>
+                <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">
+                  🧠
+                </span>
                 Select Marketing Template
               </h3>
               <select
@@ -140,7 +148,8 @@ export default function LangchainWorkflow() {
               </select>
               {selectedTemplate && (
                 <div className="text-blue-900 bg-blue-50 border border-blue-200 rounded-xl p-4 mb-2 shadow-sm">
-                  <span className="font-semibold">Description: </span>{selectedTemplate.description}
+                  <span className="font-semibold">Description: </span>
+                  {selectedTemplate.description}
                 </div>
               )}
               {variableNames.length > 0 && (
@@ -149,7 +158,9 @@ export default function LangchainWorkflow() {
                     .filter((v) => v !== 'name')
                     .map((varName) => (
                       <div key={varName} className="flex flex-col min-w-[180px]">
-                        <label className="text-sm font-semibold text-blue-700 mb-1 tracking-wide">{varName}:</label>
+                        <label className="text-sm font-semibold text-blue-700 mb-1 tracking-wide">
+                          {varName}:
+                        </label>
                         <input
                           type="text"
                           value={templateVars[varName] ?? ''}
@@ -184,12 +195,21 @@ export default function LangchainWorkflow() {
               <div className="w-full h-[420px] flex flex-col items-center justify-center bg-white/80 border border-blue-100 rounded-2xl shadow-xl">
                 <div className="text-5xl mb-4 text-blue-200">👥</div>
                 <div className="text-lg text-blue-400 font-semibold mb-2">User List will appear here</div>
-                <div className="text-blue-300">Please select a template and load users to preview the list.</div>
+                <div className="text-blue-300">
+                  Please select a template and load users to preview the list.
+                </div>
               </div>
             )}
             {loading && (
               <div className="w-full h-[420px] flex flex-col items-center justify-center bg-white/80 border border-blue-100 rounded-2xl shadow-xl animate-pulse">
-                <svg className="animate-spin mb-6" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg
+                  className="animate-spin mb-6"
+                  width="48"
+                  height="48"
+                  viewBox="0 0 48 48"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <circle cx="24" cy="24" r="20" stroke="#60a5fa" strokeWidth="6" opacity="0.2" />
                   <path d="M44 24a20 20 0 0 0-20-20" stroke="#2563eb" strokeWidth="6" strokeLinecap="round" />
                 </svg>
@@ -199,15 +219,36 @@ export default function LangchainWorkflow() {
             {userList && !loading && (
               <div className="w-full bg-white/90 backdrop-blur border border-blue-200 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
                 <div className="absolute -bottom-8 -left-8 opacity-10 pointer-events-none select-none">
-                  <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <svg
+                    width="180"
+                    height="180"
+                    viewBox="0 0 180 180"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <circle cx="90" cy="90" r="80" stroke="#2563eb" strokeWidth="8" fill="none" />
                     <circle cx="90" cy="90" r="60" stroke="#38bdf8" strokeWidth="4" fill="none" />
                   </svg>
                 </div>
-                <h3 className="font-bold text-2xl text-blue-800 mb-6 tracking-wide flex items-center gap-2">
-                  <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">👥</span>
-                  User List
-                </h3>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="font-bold text-2xl text-blue-800 tracking-wide flex items-center gap-2 m-0">
+                    <span className="inline-block w-7 h-7 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full flex items-center justify-center text-white text-lg shadow">
+                      👥
+                    </span>
+                    User List
+                  </h3>
+                  <button
+                    className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-5 py-2 rounded-xl font-bold shadow transition text-base"
+                    onClick={() => {
+                      alert(
+                        '🦾 The AI agent is on it! All emails will be sent out within 15 minutes. Sit back and relax 😎'
+                      )
+                    }}
+                    type="button"
+                  >
+                    Send All
+                  </button>
+                </div>
                 <div className="overflow-x-auto rounded-xl">
                   <table className="min-w-full text-sm text-left bg-white rounded-xl overflow-hidden shadow">
                     <thead className="bg-blue-50 text-blue-700">
@@ -224,20 +265,61 @@ export default function LangchainWorkflow() {
                     </thead>
                     <tbody>
                       {pagedUserList.map((u, idx) => (
-                        <tr key={idx} className="border-t border-blue-100 hover:bg-blue-50 transition">
-                          <td className="px-4 py-2 font-semibold text-blue-900">{u.name}</td>
-                          <td className="px-4 py-2 text-blue-800">{u.age}</td>
-                          <td className="px-4 py-2 text-blue-800">{u.gender}</td>
-                          <td className="px-4 py-2 text-blue-700">{u.traits.join(', ')}</td>
-                          <td className="px-4 py-2 text-blue-700">{u.lifestyle?.join(', ')}</td>
-                          <td className="px-4 py-2 text-blue-700">{u.beautyGoals?.join(', ')}</td>
-                          <td className="px-4 py-2 text-blue-700">{u.loyaltyScore ?? 'N/A'}</td>
+                        <tr
+                          key={idx}
+                          className={`border-t ${
+                            idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                          } hover:bg-blue-50 transition`}
+                        >
+                          <td className="px-4 py-2 font-semibold text-gray-900">{u.name}</td>
+                          <td className="px-4 py-2 text-gray-800">{u.age}</td>
+                          <td className="px-4 py-2 text-gray-800">{u.gender}</td>
+                          <td className="px-4 py-2">
+                            <div className="flex flex-wrap gap-1">
+                              {u.traits.map((t, i) => (
+                                <span
+                                  key={i}
+                                  className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full text-xs font-medium"
+                                >
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-4 py-2">
+                            <div className="flex flex-wrap gap-1">
+                              {u.lifestyle?.map((l, i) => (
+                                <span
+                                  key={i}
+                                  className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium"
+                                >
+                                  {l}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-4 py-2">
+                            <div className="flex flex-wrap gap-1">
+                              {u.beautyGoals?.map((g, i) => (
+                                <span
+                                  key={i}
+                                  className="bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full text-xs font-medium"
+                                >
+                                  {g}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td className="px-4 py-2 text-orange-700 font-bold">{u.loyaltyScore ?? 'N/A'}</td>
                           <td className="px-4 py-2">
                             <button
                               className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow transition"
                               onClick={() => {
-                                const params = new URLSearchParams({ user: u.name, template: selectedTemplateId })
-                                router.push('/ai-marketing-preview?' + params.toString())
+                                const params = new URLSearchParams({
+                                  user: u.name,
+                                  template: selectedTemplateId,
+                                })
+                                window.open('/ai-marketing-preview?' + params.toString(), '_blank')
                               }}
                             >
                               AI Preview
@@ -258,7 +340,9 @@ export default function LangchainWorkflow() {
                     >
                       Prev
                     </button>
-                    <span className="mx-2 text-blue-700 font-medium">Page {page} of {totalPages}</span>
+                    <span className="mx-2 text-blue-700 font-medium">
+                      Page {page} of {totalPages}
+                    </span>
                     <button
                       className="px-3 py-1 rounded bg-blue-100 text-blue-700 font-semibold disabled:opacity-50"
                       onClick={() => setPage(page + 1)}

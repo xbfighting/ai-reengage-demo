@@ -33,7 +33,6 @@ export default function Home() {
       setShowEmail(true)
     }, 2000)
   }
-  console.log('Generated Prompt:', promptText)
 
   useEffect(() => {
     if (userParam && templateParam) {
