@@ -8,6 +8,7 @@ import userProfiles from '@/lib/userProfiles.json'
 import { apiService, EmailScore, EmailGenerationRequest } from '@/lib/api'
 import { LoadingSpinner, ErrorState, EmptyState } from '@/components/ui/LoadingStates'
 import DynamicEmailCard from '@/components/DynamicEmailCard'
+import { Button } from '@/components/ui/Button'
 
 function AiMarketingPreviewContent() {
   const searchParams = useSearchParams()
@@ -172,14 +173,16 @@ function AiMarketingPreviewContent() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-gray-100 p-6 relative">
-      <button
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 p-6 relative">
+      <Button
         onClick={() => window.close()}
-        className="fixed top-4 right-4 z-50 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-bold px-4 py-2 rounded-full shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400"
-        title="Close this tab"
+        variant="danger"
+        size="sm"
+        className="fixed top-4 right-4 z-50"
+        icon="✕"
       >
-        ✕ Close
-      </button>
+        Close
+      </Button>
       <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
         {/* Left: User Information */}
         <div className="md:w-1/2 w-full">

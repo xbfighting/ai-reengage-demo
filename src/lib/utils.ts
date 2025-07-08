@@ -30,6 +30,13 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 }
 
 /**
+ * 合并类名的工具函数
+ */
+export function cn(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ')
+}
+
+/**
  * 格式化邮件内容，移除HTML标签但保留基本格式
  */
 export function formatEmailForCopy(htmlContent: string): string {
