@@ -30,6 +30,7 @@ export function generatePrompt(profile: UserProfile, scene: string) {
   return {
     role: "system",
     content: "You are an AI copywriting expert specializing in medical aesthetics marketing. Generate a marketing email based on the provided user profile and scene.",
+    template: " Please generate a marketing email based on the following content...",
     data: {
       userProfile: {
         name,
@@ -49,7 +50,7 @@ export function generatePrompt(profile: UserProfile, scene: string) {
         "The email tone should be caring and emotional, not too stiff.",
         "Include personalized recommendations, special offers, and motivate quick action.",
         "Tailor the content to their personality traits, lifestyle, and all profile dimensions (e.g., spending level, beauty goals, risk preference, loyalty score, etc.).",
-        "Limit the email to around 200 words.",
+        "Make the offer more specific.",
         "Output only the email body."
       ]
     }

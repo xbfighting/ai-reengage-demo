@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AnanHoliday from '@/components/AnnaHoliday'
 import MickHoliday from '@/components/MickHoliday'
 import LindaHoliday from '@/components/LindaHoliday'
@@ -16,13 +16,6 @@ export default function GeneratedEmailCard(
   { currentUser, scene }: { currentUser: UserProfile | null; scene: string },
 ) {
   const [copied, setCopied] = useState(false)
-  const [score, setScore] = useState<number | null>(null)
-
-  useEffect(() => {
-    // Simulate score generation, floating between 60 and 95
-    const simulatedScore = Math.floor(60 + Math.random() * 35)
-    setScore(simulatedScore)
-  }, [currentUser?.name])
 
   const handleCopy = async () => {
     const emailContent = document.querySelector('.generated-email-content')?.innerHTML
@@ -46,12 +39,6 @@ export default function GeneratedEmailCard(
             {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
-
-        {score !== null && (
-          <div className="mt-2 text-sm text-green-700 font-semibold">
-            Simulated Repurchase Potential Score: {score} (The higher the score, the more likely to convert)
-          </div>
-        )}
 
         <div className="generated-email-content">
           {(() => {

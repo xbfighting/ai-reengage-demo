@@ -1,17 +1,5 @@
 import { UserProfile } from '@/lib/types'
 import userProfiles from '@/lib/userProfiles.json'
-import { Radar } from 'react-chartjs-2'
-import {
-  Chart as ChartJS,
-  RadialLinearScale,
-  PointElement,
-  LineElement,
-  Filler,
-  Tooltip,
-  Legend,
-} from 'chart.js'
-
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend)
 
 export default function UserProfileCard({ username }: { username: string }) {
   // userProfiles is an array of { label, profile }, so we need to search in .profile
@@ -19,52 +7,6 @@ export default function UserProfileCard({ username }: { username: string }) {
   const profile = userObj?.profile
   if (!profile) {
     return <div className="text-red-500">User profile not found.</div>
-  }
-
-  // Radar chart for 6 selected dimensions
-  const radarLabels = [
-    'Spending',
-    'Goals',
-    'Risk Preference',
-    'Appointment Activity',
-    'Location',
-    'Loyalty',
-  ]
-  const dataValues = [
-    (profile.spendingLevel ?? 50) / 100,
-    (profile.beautyGoals?.length ?? 0) / 6,
-    profile.riskPreference === 'Adventurous' ? 1 : 0.5,
-    (profile.appointmentActivity ?? 50) / 100,
-    profile.locationLevel === 'Tier 1' ? 1 : profile.locationLevel === 'New Tier 1' ? 0.8 : profile.locationLevel === 'Tier 2' ? 0.6 : 0.4,
-    (profile.loyaltyScore ?? 50) / 100,
-  ]
-  const radarData = {
-    labels: radarLabels,
-    datasets: [
-      {
-        label: 'Profile Radar',
-        data: dataValues,
-        backgroundColor: 'rgba(59,130,246,0.2)',
-        borderColor: 'rgba(59,130,246,1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(59,130,246,1)',
-      },
-    ],
-  }
-  const radarOptions = {
-    scales: {
-      r: {
-        min: 0,
-        max: 1,
-        ticks: { display: false },
-        pointLabels: { font: { size: 16 } },
-      },
-    },
-    plugins: {
-      legend: { display: false },
-    },
-    responsive: true,
-    maintainAspectRatio: false,
   }
 
   return (
@@ -75,11 +17,6 @@ export default function UserProfileCard({ username }: { username: string }) {
           <h2 className="text-2xl font-bold mb-4 text-blue-700 w-full">User Profile</h2>
           {/* Card: Radar chart centered in one row, information list below */}
           <div className="w-full bg-white border-2 border-blue-100 rounded-2xl shadow-lg p-6 flex flex-col items-center">
-            <div className="w-full flex justify-center mb-6">
-              <div className="w-76 h-76 min-w-[30rem]">
-                <Radar data={radarData} options={radarOptions} />
-              </div>
-            </div>
             <div className="w-full max-w-2xl mx-auto space-y-3">
               <div className="flex items-center mb-1">
                 <span className="inline-block w-6 h-6 bg-blue-200 text-blue-700 rounded-full flex items-center justify-center mr-2 text-lg font-bold">👤</span>
