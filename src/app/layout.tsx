@@ -2,6 +2,7 @@
 
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import DebugPanel from '@/components/dev/DebugPanel'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
         <footer className="bg-gray-800 text-white py-4 px-6 text-center">
           <p>&copy; 2025 AI REENGAGE. All rights reserved.</p>
         </footer>
+        <DebugPanel />
       </body>
     </html>
   );

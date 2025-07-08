@@ -1,29 +1,49 @@
 'use client'
 
 import { useState } from 'react'
-import AnanHoliday from '@/components/AnnaHoliday'
-import MickHoliday from '@/components/MickHoliday'
-import LindaHoliday from '@/components/LindaHoliday'
 import { UserProfile } from '@/lib/types'
-import AnnaPR from './AnnaPR'
-import MickPR from './MickPR'
-import LindaPR from './LindaPR'
-import AnnaRR from './AnnaRR'
-import MickRR from './MickRR'
-import LindaRR from './LindaRR'
+import EmailTemplateMapper from './EmailTemplateMapper'
+import { copyToClipboard, formatEmailForCopy } from '@/lib/utils'
 
 export default function GeneratedEmailCard(
   { currentUser, scene }: { currentUser: UserProfile | null; scene: string },
 ) {
   const [copied, setCopied] = useState(false)
+  const [copyError, setCopyError] = useState(false)
 
   const handleCopy = async () => {
-    const emailContent = document.querySelector('.generated-email-content')?.innerHTML
-    if (emailContent) {
-      await navigator.clipboard.writeText(emailContent)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+    const emailElement = document.querySelector('.generated-email-content')
+    if (!emailElement) {
+      setCopyError(true)
+      setTimeout(() => setCopyError(false), 2000)
+      return
     }
+
+    // 格式化邮件内容
+    const formattedContent = formatEmailForCopy(emailElement.innerHTML)
+
+    const success = await copyToClipboard(formattedContent)
+
+    if (success) {
+      setCopied(true)
+      setCopyError(false)
+      setTimeout(() => setCopied(false), 2000)
+    } else {
+      setCopyError(true)
+      setTimeout(() => setCopyError(false), 2000)
+    }
+  }
+
+  const getButtonText = () => {
+    if (copied) return '✓ Copied!'
+    if (copyError) return '✗ Failed'
+    return 'Copy'
+  }
+
+  const getButtonStyle = () => {
+    if (copied) return 'bg-green-500 hover:bg-green-600'
+    if (copyError) return 'bg-red-500 hover:bg-red-600'
+    return 'bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500'
   }
 
   return (
@@ -33,38 +53,15 @@ export default function GeneratedEmailCard(
           <h2 className="text-2xl font-bold text-blue-700">AI Powered Marketing Email:</h2>
           <button
             onClick={handleCopy}
-            className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white text-sm px-4 py-1.5 rounded-xl font-bold shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className={`${getButtonStyle()} text-white text-sm px-4 py-1.5 rounded-xl font-bold shadow transition focus:outline-none focus:ring-2 focus:ring-blue-400`}
             style={{ minWidth: 80 }}
           >
-            {copied ? 'Copied!' : 'Copy'}
+            {getButtonText()}
           </button>
         </div>
 
         <div className="generated-email-content">
-          {(() => {
-            switch (currentUser?.name + scene) {
-              case 'Annaholiday_greeting':
-                return <AnanHoliday />
-              case 'Mikeholiday_greeting':
-                return <MickHoliday />
-              case 'Lindaholiday_greeting':
-                return <LindaHoliday />
-              case 'Annanew_product_recommendation':
-                return <AnnaPR />
-              case 'Mikenew_product_recommendation':
-                return <MickPR />
-              case 'Lindanew_product_recommendation':
-                return <LindaPR />
-              case 'Annarepurchase_reminder':
-                return <AnnaRR />
-              case 'Mikerepurchase_reminder':
-                return <MickRR />
-              case 'Lindarepurchase_reminder':
-                return <LindaRR />
-              default:
-                return null
-            }
-          })()}
+          <EmailTemplateMapper currentUser={currentUser} scene={scene} />
         </div>
       </div>
     </div>
