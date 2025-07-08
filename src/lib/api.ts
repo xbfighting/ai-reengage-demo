@@ -6,13 +6,25 @@ export interface EmailGenerationRequest {
   variables: Record<string, string | number>
 }
 
+export interface EmailScore {
+  overall: number
+  personalization: number
+  engagement: number
+  actionability: number
+  brandAlignment: number
+  explanation: string
+  suggestions: string[]
+}
+
 export interface EmailGenerationResponse {
   userProfile: {
     summary: string
     structured: UserProfile
   }
   emailText: string
+  emailScore?: EmailScore
   prompt: string
+  error?: string
 }
 
 export interface ApiErrorData {
@@ -56,42 +68,6 @@ class ApiService {
       throw new ApiError(
         'Failed to generate email. Please check your connection and try again.',
         'NETWORK_ERROR',
-        error instanceof Error ? error.message : 'Unknown error'
-      )
-    }
-  }
-
-  async generateEmailWithOpenAI(userProfile: UserProfile, scene: string): Promise<{ email: string }> {
-    try {
-      const response = await fetch(`${this.baseUrl}/api/generate-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          profile: userProfile,
-          scene: scene,
-        }),
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null)
-        throw new ApiError(
-          errorData?.message || `OpenAI request failed with status ${response.status}`,
-          response.status.toString(),
-          errorData?.details
-        )
-      }
-
-      return await response.json()
-    } catch (error) {
-      if (error instanceof ApiError) {
-        throw error
-      }
-
-      throw new ApiError(
-        'Failed to generate email with OpenAI. Please try again.',
-        'OPENAI_ERROR',
         error instanceof Error ? error.message : 'Unknown error'
       )
     }

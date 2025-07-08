@@ -27,8 +27,8 @@ Months Since Last Procedure: ${userInfo.monthsSince || 'Unknown'}
 Output Format: User Profile: xxxxx (Do not add explanations or extra content)
 `;
 
-  if (process.env.APP_ENV === 'dev') {
-    return `User Profile: ${userInfo.name}, ${userInfo.age} years old, ${userInfo.gender}. Key traits: ${userInfo.traits?.join(', ') || 'N/A'}. Loyalty: ${userInfo.loyaltyScore ?? 'N/A'}. (Mocked by AI)`;
+  if (process.env.NODE_ENV === 'development' && !process.env.OPENAI_API_KEY) {
+    return `User Profile: ${userInfo.name}, ${userInfo.age} years old, ${userInfo.gender}. Key traits: ${userInfo.traits?.join(', ') || 'N/A'}. Loyalty: ${userInfo.loyaltyScore ?? 'N/A'}. Surgery history: ${userInfo.surgery_history?.map(s => s.type).join(', ') || 'None'}. Beauty goals: ${userInfo.beautyGoals?.join(', ') || 'N/A'}. (Generated in development mode)`;
   }
 
   const res = await llm.invoke([
