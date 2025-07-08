@@ -106,47 +106,49 @@ export default function DynamicEmailCard({
       <div className="p-6 space-y-6">
         {/* Email Content */}
         <div className="dynamic-email-content bg-gray-50 rounded-xl p-5 border border-gray-200">
-          <div className="prose prose-sm max-w-none">
+          <div className="max-w-none">
             {emailContent ? (
               <div className="space-y-4">
                 {/* Edit Mode Toggle */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Button
-                      onClick={() => {
-                        setIsEditing(!isEditing)
-                        if (!isEditing) {
-                          setEditedContent(emailContent)
-                          analytics.track('email_edit_mode_toggle', {
-                            user: currentUser?.name,
-                            templateId,
-                            action: 'enable_edit'
-                          })
-                        }
-                      }}
-                      variant={isEditing ? 'warning' : 'outline'}
-                      size="sm"
-                      icon={isEditing ? '📝' : '✏️'}
-                    >
-                      {isEditing ? 'Editing' : 'Edit'}
-                    </Button>
-
-                    {isEditing && (
+                    <div className="flex items-center gap-2">
                       <Button
                         onClick={() => {
-                          setIsEditing(false)
-                          setEditedContent(emailContent)
-                          analytics.track('email_edit_cancelled', {
-                            user: currentUser?.name,
-                            templateId
-                          })
+                          setIsEditing(!isEditing)
+                          if (!isEditing) {
+                            setEditedContent(emailContent)
+                            analytics.track('email_edit_mode_toggle', {
+                              user: currentUser?.name,
+                              templateId,
+                              action: 'enable_edit'
+                            })
+                          }
                         }}
-                        variant="ghost"
+                        variant={isEditing ? 'warning' : 'outline'}
                         size="sm"
+                        icon={isEditing ? '📝' : '✏️'}
                       >
-                        Cancel
+                        {isEditing ? 'Editing' : 'Edit'}
                       </Button>
-                    )}
+
+                      {isEditing && (
+                        <Button
+                          onClick={() => {
+                            setIsEditing(false)
+                            setEditedContent(emailContent)
+                            analytics.track('email_edit_cancelled', {
+                              user: currentUser?.name,
+                              templateId
+                            })
+                          }}
+                          variant="ghost"
+                          size="sm"
+                        >
+                          Cancel
+                        </Button>
+                      )}
+                    </div>
                   </div>
 
                   {/* Custom Prompt Toggle */}
@@ -171,19 +173,21 @@ export default function DynamicEmailCard({
 
                 {/* Custom Prompt Input */}
                 {showCustomPrompt && (
-                  <Textarea
-                    label="Additional Instructions (optional)"
-                    value={customPrompt}
-                    onChange={(e) => setCustomPrompt(e.target.value)}
-                    placeholder="e.g., Make it more formal, add urgency, mention specific benefits..."
-                    rows={3}
-                    helperText="These instructions will be used to customize the email generation."
-                  />
+                  <div className="w-full">
+                    <Textarea
+                      label="Additional Instructions (optional)"
+                      value={customPrompt}
+                      onChange={(e) => setCustomPrompt(e.target.value)}
+                      placeholder="e.g., Make it more formal, add urgency, mention specific benefits..."
+                      rows={3}
+                      helperText="These instructions will be used to customize the email generation."
+                    />
+                  </div>
                 )}
 
                 {/* Email Content Display/Edit */}
                 {isEditing ? (
-                  <div className="space-y-3">
+                  <div className="space-y-3 w-full">
                     <Textarea
                       label="Edit Email Content"
                       value={editedContent}
