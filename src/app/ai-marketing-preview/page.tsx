@@ -5,7 +5,7 @@ import UserProfileSelector from '@/components/UserProfileCard'
 import { UserProfile } from '@/lib/types'
 import { useSearchParams } from 'next/navigation'
 import userProfiles from '@/lib/userProfiles.json'
-import { apiService, EmailScore } from '@/lib/api'
+import { apiService, EmailScore, EmailGenerationRequest } from '@/lib/api'
 import { LoadingSpinner, ErrorState, EmptyState } from '@/components/ui/LoadingStates'
 import DynamicEmailCard from '@/components/DynamicEmailCard'
 
@@ -22,6 +22,74 @@ function AiMarketingPreviewContent() {
   const [emailContent, setEmailContent] = useState<string>('')
   const [emailScore, setEmailScore] = useState<EmailScore | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  // 重新生成邮件的函数
+  const handleRegenerateEmail = async (customPrompt?: string, editedContent?: string) => {
+    if (!currentUser) return
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      // 根据scene(templateId)设置默认变量
+      const getDefaultVariables = (templateId: string): Record<string, string | number> => {
+        const baseVars: Record<string, string | number> = {}
+
+        switch (templateId) {
+          case 'holiday_greeting':
+            return {
+              holidayName: 'Holiday Season',
+              discount: '20',
+              primaryProcedure: currentUser.surgery_history?.[0]?.type || 'Botox',
+              validUntil: '2025-12-31',
+              location: currentUser.locationLevel || 'your area'
+            }
+          case 'repurchase_reminder':
+            return {
+              monthsSince: currentUser.monthsSince?.toString() || '12',
+              lastProcedure: currentUser.surgery_history?.[currentUser.surgery_history.length - 1]?.type || 'last treatment',
+              primaryProcedure: currentUser.surgery_history?.[0]?.type || 'Botox',
+              discount: '15',
+              location: currentUser.locationLevel || 'your area'
+            }
+          case 'new_product_recommendation':
+            return {
+              newProductName: 'Advanced Skin Rejuvenation',
+              primaryProcedure: currentUser.surgery_history?.[0]?.type || 'aesthetic treatments',
+              referralSource: currentUser.referralSource || 'valued customer',
+              trialDiscount: '25'
+            }
+          default:
+            return baseVars
+        }
+      }
+
+      const variables = getDefaultVariables(scene)
+
+      // 构建请求
+      const request: EmailGenerationRequest = {
+        userInfo: currentUser,
+        templateId: scene,
+        variables: variables,
+        ...(customPrompt && { customPrompt }),
+        ...(editedContent && { editedContent })
+      }
+
+      // 调用API重新生成邮件
+      const response = await apiService.generateEmail(request)
+
+      setEmailContent(response.emailText)
+      setEmailScore(response.emailScore || null)
+      setPromptText(response.prompt)
+
+    } catch (err: unknown) {
+      console.error('Error regenerating email:', err)
+      const errorMessage = err instanceof Error ? err.message : 'Failed to regenerate email'
+      setError(errorMessage)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // 真正的API调用邮件生成
   const handleGenerate = async (userProfile: UserProfile, templateId: string) => {
@@ -148,6 +216,8 @@ function AiMarketingPreviewContent() {
               emailContent={emailContent}
               emailScore={emailScore || undefined}
               prompt={promptText || undefined}
+              onRegenerateEmail={handleRegenerateEmail}
+              templateId={scene}
             />
           )}
         </div>

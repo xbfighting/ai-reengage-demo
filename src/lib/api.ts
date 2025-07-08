@@ -4,6 +4,8 @@ export interface EmailGenerationRequest {
   userInfo: UserProfile
   templateId: string
   variables: Record<string, string | number>
+  customPrompt?: string
+  editedContent?: string
 }
 
 export interface EmailScore {
