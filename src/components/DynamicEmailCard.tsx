@@ -20,7 +20,7 @@ interface EmailScore {
 interface DynamicEmailCardProps {
   currentUser: UserProfile | null
   emailContent: string
-  emailScore?: EmailScore
+  emailScore?: EmailScore // Temporarily hidden
   prompt?: string
   onRegenerateEmail?: (customPrompt?: string, editedContent?: string) => Promise<void>
   templateId?: string
@@ -29,7 +29,7 @@ interface DynamicEmailCardProps {
 export default function DynamicEmailCard({
   currentUser,
   emailContent,
-  emailScore,
+  // emailScore, // Temporarily hidden
   prompt,
   onRegenerateEmail,
   templateId
@@ -37,7 +37,7 @@ export default function DynamicEmailCard({
   const [copied, setCopied] = useState(false)
   const [copyError, setCopyError] = useState(false)
   const [showPrompt, setShowPrompt] = useState(false)
-  const [showScore, setShowScore] = useState(false)
+  // const [showScore, setShowScore] = useState(false) // Temporarily hidden
   const [isEditing, setIsEditing] = useState(false)
   const [editedContent, setEditedContent] = useState(emailContent)
   const [customPrompt, setCustomPrompt] = useState('')
