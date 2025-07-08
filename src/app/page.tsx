@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import userProfiles from '@/lib/userProfiles.json'
 import campaignTemplates from '@/agent/campaignTemplates.json'
 import { UserProfile } from '@/lib/types'
+import { Button } from '@/components/ui/Button'
 // import { useRouter } from 'next/navigation'
 
 export default function LangchainWorkflow() {
@@ -170,21 +171,18 @@ export default function LangchainWorkflow() {
                     ))}
                 </div>
               )}
-              <button
+              <Button
                 onClick={handleSubmit}
-                className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-8 py-3 rounded-2xl font-bold shadow-xl transition text-lg mt-8 w-full tracking-wider flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                variant="primary"
+                size="lg"
+                loading={loading}
                 disabled={loading}
+                fullWidth
+                className="mt-8 text-lg tracking-wider"
+                icon={loading ? '⚡' : '🚀'}
               >
-                {loading ? (
-                  <>
-                    <span className="animate-spin inline-block mr-2">⚡</span>Loading Users...
-                  </>
-                ) : (
-                  <>
-                    <span className="inline-block">🚀</span>Load User List
-                  </>
-                )}
-              </button>
+                {loading ? 'Loading Users...' : 'Load User List'}
+              </Button>
             </div>
           </div>
           {/* Right: User List Table or Placeholder/Loading */}
@@ -236,17 +234,18 @@ export default function LangchainWorkflow() {
                   <h3 className="font-bold text-2xl text-blue-800 tracking-wide flex items-center gap-2 m-0">
                     Audience (AI-Generated Profiles)
                   </h3>
-                  <button
-                    className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-5 py-2 rounded-xl font-bold shadow transition text-base"
+                  <Button
                     onClick={() => {
                       alert(
                         '🦾 The AI agent is on it! All emails will be sent out within 15 minutes. Sit back and relax 😎'
                       )
                     }}
-                    type="button"
+                    variant="primary"
+                    size="md"
+                    icon="📧"
                   >
                     Send All
-                  </button>
+                  </Button>
                 </div>
                 <div className="overflow-x-auto rounded-xl">
                   <table className="min-w-full text-sm text-left bg-white rounded-xl overflow-hidden shadow">
@@ -311,8 +310,7 @@ export default function LangchainWorkflow() {
                           </td>
                           <td className="px-4 py-2 text-orange-700 font-bold">{u.loyaltyScore ?? 'N/A'}</td>
                           <td className="px-4 py-2">
-                            <button
-                              className="bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow transition"
+                            <Button
                               onClick={() => {
                                 const params = new URLSearchParams({
                                   user: u.name,
@@ -320,9 +318,12 @@ export default function LangchainWorkflow() {
                                 })
                                 window.open('/ai-marketing-preview?' + params.toString(), '_blank')
                               }}
+                              variant="primary"
+                              size="sm"
+                              icon="🤖"
                             >
                               AI Preview
-                            </button>
+                            </Button>
                           </td>
                         </tr>
                       ))}
@@ -331,24 +332,28 @@ export default function LangchainWorkflow() {
                 </div>
                 {/* Pagination Controls */}
                 {totalPages > 1 && (
-                  <div className="flex justify-center items-center gap-2 mt-6">
-                    <button
-                      className="px-3 py-1 rounded bg-blue-100 text-blue-700 font-semibold disabled:opacity-50"
+                  <div className="flex justify-center items-center gap-3 mt-6">
+                    <Button
                       onClick={() => setPage(page - 1)}
                       disabled={page === 1}
+                      variant="outline"
+                      size="sm"
+                      icon="←"
                     >
                       Prev
-                    </button>
-                    <span className="mx-2 text-blue-700 font-medium">
+                    </Button>
+                    <span className="mx-2 text-blue-700 font-medium px-3 py-2 bg-blue-50 rounded-lg">
                       Page {page} of {totalPages}
                     </span>
-                    <button
-                      className="px-3 py-1 rounded bg-blue-100 text-blue-700 font-semibold disabled:opacity-50"
+                    <Button
                       onClick={() => setPage(page + 1)}
                       disabled={page === totalPages}
+                      variant="outline"
+                      size="sm"
+                      icon="→"
                     >
                       Next
-                    </button>
+                    </Button>
                   </div>
                 )}
               </div>
