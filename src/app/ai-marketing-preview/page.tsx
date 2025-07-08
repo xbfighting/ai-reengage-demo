@@ -3,10 +3,11 @@
 import { Suspense, useState, useEffect } from 'react'
 import UserProfileSelector from '@/components/UserProfileCard'
 import { UserProfile } from '@/lib/types'
-import { generatePrompt } from '@/lib/prompts'
-import GeneratedEmailCard from '@/components/GeneratedEmailCard'
 import { useSearchParams } from 'next/navigation'
 import userProfiles from '@/lib/userProfiles.json'
+import { apiService, EmailScore } from '@/lib/api'
+import { LoadingSpinner, ErrorState, EmptyState } from '@/components/ui/LoadingStates'
+import DynamicEmailCard from '@/components/DynamicEmailCard'
 
 function AiMarketingPreviewContent() {
   const searchParams = useSearchParams()
@@ -16,22 +17,75 @@ function AiMarketingPreviewContent() {
   const [promptText, setPromptText] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null)
-  const [scene, setScene] = useState<string>('holiday')
+  const [scene, setScene] = useState<string>('holiday_greeting')
   const [showEmail, setShowEmail] = useState(false)
-  const [showPrompt, setShowPrompt] = useState(false) // New state for controlling prompt visibility
+  const [emailContent, setEmailContent] = useState<string>('')
+  const [emailScore, setEmailScore] = useState<EmailScore | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
-  // Mock email generation (searching JSON based on name and scene)
-  const handleGenerate = async (userProfile: UserProfile, scene: string) => {
+  // 真正的API调用邮件生成
+  const handleGenerate = async (userProfile: UserProfile, templateId: string) => {
     setLoading(true)
     setShowEmail(false)
-    const prompt = generatePrompt(userProfile, scene)
-    setPromptText(JSON.stringify(prompt))
-    setCurrentUser(userProfile)
-    setScene(scene)
-    setTimeout(() => {
-      setLoading(false)
+    setError(null)
+
+    try {
+      // 根据templateId设置默认变量
+      const getDefaultVariables = (templateId: string): Record<string, string | number> => {
+        const baseVars: Record<string, string | number> = {}
+
+        switch (templateId) {
+          case 'holiday_greeting':
+            return {
+              holidayName: 'Holiday Season',
+              discount: '20',
+              primaryProcedure: userProfile.surgery_history?.[0]?.type || 'Botox',
+              validUntil: '2025-12-31',
+              location: userProfile.locationLevel || 'your area'
+            }
+          case 'repurchase_reminder':
+            return {
+              monthsSince: userProfile.monthsSince?.toString() || '12',
+              lastProcedure: userProfile.surgery_history?.[userProfile.surgery_history.length - 1]?.type || 'last treatment',
+              primaryProcedure: userProfile.surgery_history?.[0]?.type || 'Botox',
+              discount: '15',
+              location: userProfile.locationLevel || 'your area'
+            }
+          case 'new_product_recommendation':
+            return {
+              newProductName: 'Advanced Skin Rejuvenation',
+              primaryProcedure: userProfile.surgery_history?.[0]?.type || 'aesthetic treatments',
+              referralSource: userProfile.referralSource || 'valued customer',
+              trialDiscount: '25'
+            }
+          default:
+            return baseVars
+        }
+      }
+
+      const variables = getDefaultVariables(templateId)
+
+      // 调用API生成邮件
+      const response = await apiService.generateEmail({
+        userInfo: userProfile,
+        templateId: templateId,
+        variables: variables
+      })
+
+      setEmailContent(response.emailText)
+      setEmailScore(response.emailScore || null)
+      setPromptText(response.prompt)
+      setCurrentUser(userProfile)
+      setScene(templateId)
       setShowEmail(true)
-    }, 2000)
+
+    } catch (err: unknown) {
+      console.error('Error generating email:', err)
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate email'
+      setError(errorMessage)
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -67,35 +121,34 @@ function AiMarketingPreviewContent() {
             <div className="text-gray-400">No user selected.</div>
           )}
         </div>
-        {/* Right: Prompt + Email in a vertical structure */}
+        {/* Right: Email Content and Debug Info */}
         <div className="md:w-1/2 w-full flex flex-col gap-6 justify-start">
-          {/* 邮件卡片站位元素 */}
-          {!loading && !showEmail && (
-            <div className="h-72 bg-white rounded-xl shadow flex items-center justify-center text-gray-300 text-lg border border-dashed border-gray-200">
-              Email content will appear here
-            </div>
+          {/* Error State */}
+          {error && (
+            <ErrorState
+              message={error}
+              onRetry={() => currentUser && handleGenerate(currentUser, scene)}
+            />
           )}
+
+          {/* Empty State */}
+          {!loading && !showEmail && !error && (
+            <EmptyState message="Email content will appear here after generation" />
+          )}
+
+          {/* Loading State */}
           {loading && (
-            <div className="flex items-center justify-center h-72 bg-white rounded-xl shadow text-blue-600 text-lg font-semibold animate-pulse">
-              Generating email...
-            </div>
+            <LoadingSpinner message="Generating personalized email..." />
           )}
-          {showEmail && !loading && <GeneratedEmailCard currentUser={currentUser} scene={scene} />}
-          {promptText && (
-            <div className="bg-yellow-50 rounded shadow p-4 text-sm">
-              <h3
-                className="font-bold mb-2 cursor-pointer flex items-center justify-between"
-                onClick={() => setShowPrompt((prev) => !prev)}
-              >
-                Prompt for Debugging:
-                <span className="text-blue-500">{showPrompt ? 'Collapse' : 'Expand'}</span>
-              </h3>
-              {showPrompt && (
-                <pre className="whitespace-pre-wrap bg-gray-100 p-2 rounded border border-gray-300 overflow-auto">
-                  {JSON.stringify(JSON.parse(promptText), null, 2)}
-                </pre>
-              )}
-            </div>
+
+          {/* Generated Email */}
+          {showEmail && !loading && !error && emailContent && (
+            <DynamicEmailCard
+              currentUser={currentUser}
+              emailContent={emailContent}
+              emailScore={emailScore || undefined}
+              prompt={promptText || undefined}
+            />
           )}
         </div>
       </div>
