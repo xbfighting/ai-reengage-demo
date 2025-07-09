@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { AdvancedTargetingEngine, TargetingResults } from '@/lib/targeting-engine'
+import userProfiles from '@/lib/userProfiles.json'
+import { UserProfile } from '@/lib/types'
 
 export interface CampaignRequest {
   campaignName: string
@@ -43,14 +46,26 @@ export async function POST(request: NextRequest) {
     // Simulate AI processing delay
     await new Promise(resolve => setTimeout(resolve, 1000))
     
-    const messages = generateChannelSpecificMessages(campaignData)
+    // 使用高级定位引擎
+    const users = (userProfiles as { label: string; profile: UserProfile }[]).map(u => u.profile)
+    const targetingEngine = new AdvancedTargetingEngine(users)
+    const targetingResults = targetingEngine.analyzeTargeting(campaignData)
+    
+    const messages = generateChannelSpecificMessages(campaignData, targetingResults)
     
     return NextResponse.json({
       success: true,
       campaignId: `campaign_${Date.now()}`,
       messages,
       totalGenerated: messages.length,
-      estimatedReach: calculateEstimatedReach(campaignData)
+      estimatedReach: targetingResults.matchedUsers,
+      targetingResults: {
+        totalUsers: targetingResults.totalUsers,
+        matchedUsers: targetingResults.matchedUsers,
+        averageScore: Math.round(targetingResults.averageScore * 100),
+        channelDistribution: targetingResults.channelDistribution,
+        urgencyDistribution: targetingResults.urgencyDistribution
+      }
     })
     
   } catch (error) {
@@ -62,30 +77,83 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function generateChannelSpecificMessages(campaignData: CampaignRequest): GeneratedMessage[] {
-  const samplePatients = [
-    { name: 'Jennifer', age: 52, procedures: ['Botox'], traits: ['Professional', 'Quality-focused'] },
-    { name: 'Michelle', age: 48, procedures: ['Filler'], traits: ['Social', 'Trend-conscious'] },
-    { name: 'Sarah', age: 35, procedures: ['Laser'], traits: ['Busy Mom', 'Practical'] },
-    { name: 'Lisa', age: 42, procedures: ['Thread Lift'], traits: ['Elegant', 'Sophisticated'] },
-    { name: 'Amanda', age: 38, procedures: ['Morpheus8'], traits: ['Active', 'Health-conscious'] }
-  ]
+function generateChannelSpecificMessages(campaignData: CampaignRequest, targetingResults: TargetingResults): GeneratedMessage[] {
+  // 使用定位引擎的结果生成消息
+  const topTargets = targetingResults.topTargets.slice(0, 5) // 取前5个最佳目标
   
-  return samplePatients.map((patient, index) => {
-    const personalizedElements = generatePersonalizedElements(patient, campaignData)
-    const content = generateContent(patient, campaignData, personalizedElements)
+  return topTargets.map((target, index) => {
+    const personalizedElements = [
+      `Targeting Score: ${Math.round(target.totalScore * 100)}%`,
+      ...target.personalizedHooks,
+      `Recommended Channel: ${target.recommendedChannel.toUpperCase()}`,
+      `Urgency: ${target.urgencyLevel.toUpperCase()}`
+    ]
+    
+    const content = generateAdvancedContent(target, campaignData)
     
     return {
       id: `msg_${index + 1}`,
-      patientName: patient.name,
-      channel: campaignData.channel,
-      subject: campaignData.channel === 'email' ? generateEmailSubject(patient, campaignData) : undefined,
+      patientName: target.userName,
+      channel: target.recommendedChannel,
+      subject: target.recommendedChannel === 'email' ? generateAdvancedEmailSubject(target, campaignData) : undefined,
       content,
       personalizedElements,
-      matchingCriteria: generateMatchingCriteria(patient, campaignData),
-      estimatedEngagement: Math.floor(Math.random() * 40) + 60 // 60-100%
+      matchingCriteria: target.matchingReasons,
+      estimatedEngagement: Math.floor(target.totalScore * 40) + 60 // 基于定位分数
     }
   })
+}
+
+function generateAdvancedContent(target: any, campaignData: CampaignRequest): string {
+  if (target.recommendedChannel === 'email') {
+    return generateAdvancedEmailContent(target, campaignData)
+  } else {
+    return generateAdvancedTextContent(target, campaignData)
+  }
+}
+
+function generateAdvancedEmailContent(target: any, campaignData: CampaignRequest): string {
+  const urgencyPrefix = target.urgencyLevel === 'high' ? 'URGENT: ' : ''
+  const personalizedHooks = target.personalizedHooks.join('\n')
+  
+  return `${urgencyPrefix}Hi ${target.userName},
+
+${personalizedHooks}
+
+Based on your profile and interests, we've designed a special offer just for you.
+
+${campaignData.campaignBrief}
+
+Why this is perfect for you:
+${target.matchingReasons.map((reason: string) => `• ${reason}`).join('\n')}
+
+Our recommendation: Book within the next 48 hours for priority scheduling.
+
+Your targeting score: ${Math.round(target.totalScore * 100)}%
+
+Best regards,
+Dr. Clevens Team
+
+[Book Now - Priority Access]`
+}
+
+function generateAdvancedTextContent(target: any, campaignData: CampaignRequest): string {
+  const urgencyEmoji = target.urgencyLevel === 'high' ? '🚨' : '✨'
+  const hook = target.personalizedHooks[0] || 'Special offer for you'
+  
+  return `Hi ${target.userName}! ${urgencyEmoji} ${hook}. ${campaignData.campaignBrief.slice(0, 60)}... Priority booking available! Reply YES for times.`
+}
+
+function generateAdvancedEmailSubject(target: any, campaignData: CampaignRequest): string {
+  const urgencyPrefix = target.urgencyLevel === 'high' ? 'URGENT: ' : ''
+  const templates = [
+    `${urgencyPrefix}${target.userName}, Your Perfect Treatment Awaits`,
+    `${urgencyPrefix}${target.userName}, Exclusive Offer Based on Your Profile`,
+    `${urgencyPrefix}${target.userName}, ${Math.round(target.totalScore * 100)}% Match - Don't Miss This`,
+    `${urgencyPrefix}${target.userName}, Your Personalized Beauty Plan Is Ready`
+  ]
+  
+  return templates[Math.floor(Math.random() * templates.length)]
 }
 
 function generatePersonalizedElements(patient: any, campaignData: CampaignRequest): string[] {

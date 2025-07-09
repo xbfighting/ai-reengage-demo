@@ -37,6 +37,13 @@ export default function CampaignBuilderPage() {
     campaignId: string
     totalGenerated: number
     estimatedReach: number
+    targetingResults?: {
+      totalUsers: number
+      matchedUsers: number
+      averageScore: number
+      channelDistribution: { email: number; text: number }
+      urgencyDistribution: { low: number; medium: number; high: number }
+    }
   } | null>(null)
 
   const procedures = [
@@ -86,7 +93,8 @@ export default function CampaignBuilderPage() {
         setCampaignResults({
           campaignId: result.campaignId,
           totalGenerated: result.totalGenerated,
-          estimatedReach: result.estimatedReach
+          estimatedReach: result.estimatedReach,
+          targetingResults: result.targetingResults
         })
       } else {
         console.error('Campaign generation failed:', result.error)
@@ -442,19 +450,76 @@ export default function CampaignBuilderPage() {
             
             {/* Campaign Results */}
             {campaignResults && (
-              <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
-                <h4 className="font-semibold text-green-800 mb-2">Campaign Generated Successfully!</h4>
-                <div className="grid grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <span className="font-medium">Campaign ID:</span> {campaignResults.campaignId}
-                  </div>
-                  <div>
-                    <span className="font-medium">Messages Generated:</span> {campaignResults.totalGenerated}
-                  </div>
-                  <div>
-                    <span className="font-medium">Estimated Reach:</span> {campaignResults.estimatedReach.toLocaleString()} patients
+              <div className="mt-8 space-y-4">
+                <div className="p-6 bg-green-50 border border-green-200 rounded-lg">
+                  <h4 className="font-semibold text-green-800 mb-4">Campaign Generated Successfully!</h4>
+                  <div className="grid grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <span className="font-medium">Campaign ID:</span> {campaignResults.campaignId}
+                    </div>
+                    <div>
+                      <span className="font-medium">Messages Generated:</span> {campaignResults.totalGenerated}
+                    </div>
+                    <div>
+                      <span className="font-medium">Estimated Reach:</span> {campaignResults.estimatedReach.toLocaleString()} patients
+                    </div>
                   </div>
                 </div>
+                
+                {/* Advanced Targeting Results */}
+                {campaignResults.targetingResults && (
+                  <div className="p-6 bg-blue-50 border border-blue-200 rounded-lg">
+                    <h4 className="font-semibold text-blue-800 mb-4">Advanced Targeting Analysis</h4>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div>
+                        <span className="font-medium">Total Users:</span> {campaignResults.targetingResults.totalUsers}
+                      </div>
+                      <div>
+                        <span className="font-medium">Matched Users:</span> {campaignResults.targetingResults.matchedUsers}
+                      </div>
+                      <div>
+                        <span className="font-medium">Average Score:</span> {campaignResults.targetingResults.averageScore}%
+                      </div>
+                      <div>
+                        <span className="font-medium">Match Rate:</span> {Math.round((campaignResults.targetingResults.matchedUsers / campaignResults.targetingResults.totalUsers) * 100)}%
+                      </div>
+                    </div>
+                    
+                    <div className="mt-4 grid grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="font-medium text-blue-700 mb-2">Channel Distribution</h5>
+                        <div className="space-y-1 text-sm">
+                          <div className="flex justify-between">
+                            <span>Email:</span>
+                            <span>{campaignResults.targetingResults.channelDistribution.email}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Text:</span>
+                            <span>{campaignResults.targetingResults.channelDistribution.text}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-blue-700 mb-2">Urgency Distribution</h5>
+                        <div className="space-y-1 text-sm">
+                          <div className="flex justify-between">
+                            <span>High:</span>
+                            <span className="text-red-600">{campaignResults.targetingResults.urgencyDistribution.high}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Medium:</span>
+                            <span className="text-orange-600">{campaignResults.targetingResults.urgencyDistribution.medium}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Low:</span>
+                            <span className="text-green-600">{campaignResults.targetingResults.urgencyDistribution.low}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             
