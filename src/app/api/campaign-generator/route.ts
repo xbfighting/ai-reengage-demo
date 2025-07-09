@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { AdvancedTargetingEngine, TargetingResults } from '@/lib/targeting-engine'
+import { AIMessageScoringSystem, ABTestOptimizer } from '@/lib/ai-scoring-system'
 import userProfiles from '@/lib/userProfiles.json'
 import { UserProfile } from '@/lib/types'
 
@@ -53,6 +54,14 @@ export async function POST(request: NextRequest) {
     
     const messages = generateChannelSpecificMessages(campaignData, targetingResults)
     
+    // 使用AI评分系统
+    const scoringSystem = new AIMessageScoringSystem(campaignData)
+    const campaignScore = scoringSystem.scoreCampaign(messages)
+    
+    // 生成A/B测试变体（可选）
+    const abOptimizer = new ABTestOptimizer()
+    const abVariants = messages.length > 0 ? abOptimizer.generateABVariants(messages[0], campaignData) : []
+    
     return NextResponse.json({
       success: true,
       campaignId: `campaign_${Date.now()}`,
@@ -65,7 +74,14 @@ export async function POST(request: NextRequest) {
         averageScore: Math.round(targetingResults.averageScore * 100),
         channelDistribution: targetingResults.channelDistribution,
         urgencyDistribution: targetingResults.urgencyDistribution
-      }
+      },
+      aiScoring: {
+        overallScore: Math.round(campaignScore.averageScore * 100),
+        messageScores: campaignScore.messageScores,
+        campaignOptimizations: campaignScore.campaignOptimizations,
+        predictedMetrics: campaignScore.predictedMetrics
+      },
+      abTestVariants: abVariants.slice(0, 3) // 只返回前3个变体
     })
     
   } catch (error) {

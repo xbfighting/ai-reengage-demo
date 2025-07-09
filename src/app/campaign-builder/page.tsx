@@ -44,6 +44,22 @@ export default function CampaignBuilderPage() {
       channelDistribution: { email: number; text: number }
       urgencyDistribution: { low: number; medium: number; high: number }
     }
+    aiScoring?: {
+      overallScore: number
+      messageScores: any[]
+      campaignOptimizations: {
+        bestPerformingPatterns: string[]
+        underperformingElements: string[]
+        globalRecommendations: string[]
+      }
+      predictedMetrics: {
+        openRate: number
+        clickThroughRate: number
+        conversionRate: number
+        responseRate: number
+      }
+    }
+    abTestVariants?: GeneratedMessage[]
   } | null>(null)
 
   const procedures = [
@@ -94,7 +110,9 @@ export default function CampaignBuilderPage() {
           campaignId: result.campaignId,
           totalGenerated: result.totalGenerated,
           estimatedReach: result.estimatedReach,
-          targetingResults: result.targetingResults
+          targetingResults: result.targetingResults,
+          aiScoring: result.aiScoring,
+          abTestVariants: result.abTestVariants
         })
       } else {
         console.error('Campaign generation failed:', result.error)
@@ -520,6 +538,58 @@ export default function CampaignBuilderPage() {
                     </div>
                   </div>
                 )}
+                
+                {/* AI Scoring Results */}
+                {campaignResults.aiScoring && (
+                  <div className="p-6 bg-purple-50 border border-purple-200 rounded-lg">
+                    <h4 className="font-semibold text-purple-800 mb-4">AI Quality Scoring & Optimization</h4>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-purple-600">{campaignResults.aiScoring.overallScore}%</div>
+                        <div className="text-sm text-gray-600">Overall Score</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-green-600">{campaignResults.aiScoring.predictedMetrics.openRate}%</div>
+                        <div className="text-sm text-gray-600">Predicted Open Rate</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-blue-600">{campaignResults.aiScoring.predictedMetrics.clickThroughRate}%</div>
+                        <div className="text-sm text-gray-600">Click-Through Rate</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-2xl font-bold text-orange-600">{campaignResults.aiScoring.predictedMetrics.conversionRate}%</div>
+                        <div className="text-sm text-gray-600">Conversion Rate</div>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="font-medium text-purple-700 mb-2">Best Performing Patterns</h5>
+                        <ul className="text-sm space-y-1">
+                          {campaignResults.aiScoring.campaignOptimizations.bestPerformingPatterns.map((pattern, index) => (
+                            <li key={index} className="flex items-center">
+                              <span className="text-green-500 mr-2">✓</span>
+                              {pattern}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h5 className="font-medium text-purple-700 mb-2">Optimization Recommendations</h5>
+                        <ul className="text-sm space-y-1">
+                          {campaignResults.aiScoring.campaignOptimizations.globalRecommendations.map((rec, index) => (
+                            <li key={index} className="flex items-center">
+                              <span className="text-blue-500 mr-2">→</span>
+                              {rec}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             
@@ -527,43 +597,134 @@ export default function CampaignBuilderPage() {
             {generatedMessages.length > 0 && (
               <div className="mt-8 space-y-4">
                 <h4 className="font-semibold text-lg">Generated Messages Preview</h4>
-                {generatedMessages.map((message) => (
-                  <Card key={message.id} className="p-4">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h5 className="font-medium">{message.patientName}</h5>
-                        <Badge variant="outline" className="mt-1">
-                          {message.channel.toUpperCase()}
-                        </Badge>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm text-green-600 font-medium">
-                          {message.estimatedEngagement}% engagement
+                {generatedMessages.map((message, index) => {
+                  const messageScore = campaignResults?.aiScoring?.messageScores?.[index]
+                  
+                  return (
+                    <Card key={message.id} className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h5 className="font-medium">{message.patientName}</h5>
+                          <div className="flex gap-2 mt-1">
+                            <Badge variant="outline">
+                              {message.channel.toUpperCase()}
+                            </Badge>
+                            {messageScore && (
+                              <Badge variant={messageScore.overallScore >= 0.8 ? "default" : messageScore.overallScore >= 0.6 ? "secondary" : "destructive"}>
+                                AI Score: {Math.round(messageScore.overallScore * 100)}%
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm text-green-600 font-medium">
+                            {message.estimatedEngagement}% engagement
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    {message.subject && (
-                      <div className="mb-2">
-                        <span className="text-sm font-medium text-gray-600">Subject:</span>
-                        <div className="text-sm text-gray-900">{message.subject}</div>
+                      
+                      {message.subject && (
+                        <div className="mb-2">
+                          <span className="text-sm font-medium text-gray-600">Subject:</span>
+                          <div className="text-sm text-gray-900">{message.subject}</div>
+                        </div>
+                      )}
+                      
+                      <div className="mb-3">
+                        <span className="text-sm font-medium text-gray-600">Content:</span>
+                        <div className="text-sm text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+                          {message.content}
+                        </div>
                       </div>
-                    )}
-                    
-                    <div className="mb-3">
-                      <span className="text-sm font-medium text-gray-600">Content:</span>
-                      <div className="text-sm text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
-                        {message.content}
+                      
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        <div className="text-xs text-gray-500">
+                          <span className="font-medium">Personalized:</span> {message.personalizedElements.join(', ')}
+                        </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex flex-wrap gap-2">
+                      
+                      {/* AI Scoring Details */}
+                      {messageScore && (
+                        <div className="border-t pt-3 mt-3">
+                          <h6 className="font-medium text-gray-800 mb-2">AI Analysis</h6>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs mb-2">
+                            <div>
+                              <span className="font-medium">Personalization:</span> {Math.round(messageScore.personalizationScore * 100)}%
+                            </div>
+                            <div>
+                              <span className="font-medium">Engagement:</span> {Math.round(messageScore.engagementScore * 100)}%
+                            </div>
+                            <div>
+                              <span className="font-medium">Actionability:</span> {Math.round(messageScore.actionabilityScore * 100)}%
+                            </div>
+                            <div>
+                              <span className="font-medium">Brand Alignment:</span> {Math.round(messageScore.brandAlignmentScore * 100)}%
+                            </div>
+                          </div>
+                          
+                          {messageScore.detailedFeedback.strengths.length > 0 && (
+                            <div className="mb-2">
+                              <span className="text-xs font-medium text-green-600">Strengths:</span>
+                              <ul className="text-xs text-green-600 ml-4">
+                                {messageScore.detailedFeedback.strengths.map((strength, i) => (
+                                  <li key={i}>• {strength}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                          
+                          {messageScore.detailedFeedback.suggestions.length > 0 && (
+                            <div>
+                              <span className="text-xs font-medium text-blue-600">Suggestions:</span>
+                              <ul className="text-xs text-blue-600 ml-4">
+                                {messageScore.detailedFeedback.suggestions.map((suggestion, i) => (
+                                  <li key={i}>• {suggestion}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </Card>
+                  )
+                })}
+              </div>
+            )}
+            
+            {/* A/B Test Variants */}
+            {campaignResults?.abTestVariants && campaignResults.abTestVariants.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h4 className="font-semibold text-lg">A/B Test Variants</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {campaignResults.abTestVariants.map((variant, index) => (
+                    <Card key={variant.id} className="p-4">
+                      <div className="mb-3">
+                        <h5 className="font-medium">{variant.patientName}</h5>
+                        <Badge variant="outline" className="mt-1">
+                          Variant {String.fromCharCode(65 + index)}
+                        </Badge>
+                      </div>
+                      
+                      {variant.subject && (
+                        <div className="mb-2">
+                          <span className="text-sm font-medium text-gray-600">Subject:</span>
+                          <div className="text-sm text-gray-900">{variant.subject}</div>
+                        </div>
+                      )}
+                      
+                      <div className="mb-3">
+                        <span className="text-sm font-medium text-gray-600">Content:</span>
+                        <div className="text-sm text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+                          {variant.content}
+                        </div>
+                      </div>
+                      
                       <div className="text-xs text-gray-500">
-                        <span className="font-medium">Personalized:</span> {message.personalizedElements.join(', ')}
+                        <span className="font-medium">Variant Type:</span> {variant.personalizedElements[variant.personalizedElements.length - 1]}
                       </div>
-                    </div>
-                  </Card>
-                ))}
+                    </Card>
+                  ))}
+                </div>
               </div>
             )}
           </CardContent>
