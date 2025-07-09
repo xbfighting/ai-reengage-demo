@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import type { CampaignRequest, GeneratedMessage } from '@/app/api/campaign-generator/route'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -30,14 +31,23 @@ export default function CampaignBuilderPage() {
   const [seasonalTriggers, setSeasonalTriggers] = useState<string[]>([])
   const [culturalTriggers, setCulturalTriggers] = useState<string[]>([])
   const [customFlair, setCustomFlair] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
+  const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
+  const [campaignResults, setCampaignResults] = useState<{
+    campaignId: string
+    totalGenerated: number
+    estimatedReach: number
+  } | null>(null)
 
   const procedures = [
     'Botox', 'Filler', 'Thread Lift', 'Morpheus8', 'Laser Resurfacing',
     'Chemical Peel', 'Microneedling', 'PRP', 'Sculptra', 'Kybella'
   ]
 
-  const handleGeneratePreview = () => {
-    const campaignData = {
+  const handleGeneratePreview = async () => {
+    setIsGenerating(true)
+    
+    const campaignData: CampaignRequest = {
       campaignName,
       channel,
       campaignBrief,
@@ -61,8 +71,31 @@ export default function CampaignBuilderPage() {
       },
       customFlair
     }
-    console.log('Campaign Data:', campaignData)
-    // TODO: Navigate to preview page or show preview modal
+    
+    try {
+      const response = await fetch('/api/campaign-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(campaignData)
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        setGeneratedMessages(result.messages)
+        setCampaignResults({
+          campaignId: result.campaignId,
+          totalGenerated: result.totalGenerated,
+          estimatedReach: result.estimatedReach
+        })
+      } else {
+        console.error('Campaign generation failed:', result.error)
+      }
+    } catch (error) {
+      console.error('Error generating campaign:', error)
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   return (
@@ -401,10 +434,73 @@ export default function CampaignBuilderPage() {
                 onClick={handleGeneratePreview}
                 size="lg"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                disabled={isGenerating}
               >
-                Preview & Generate
+                {isGenerating ? 'Generating...' : 'Preview & Generate'}
               </Button>
             </div>
+            
+            {/* Campaign Results */}
+            {campaignResults && (
+              <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-2">Campaign Generated Successfully!</h4>
+                <div className="grid grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <span className="font-medium">Campaign ID:</span> {campaignResults.campaignId}
+                  </div>
+                  <div>
+                    <span className="font-medium">Messages Generated:</span> {campaignResults.totalGenerated}
+                  </div>
+                  <div>
+                    <span className="font-medium">Estimated Reach:</span> {campaignResults.estimatedReach.toLocaleString()} patients
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* Generated Messages */}
+            {generatedMessages.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h4 className="font-semibold text-lg">Generated Messages Preview</h4>
+                {generatedMessages.map((message) => (
+                  <Card key={message.id} className="p-4">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <h5 className="font-medium">{message.patientName}</h5>
+                        <Badge variant="outline" className="mt-1">
+                          {message.channel.toUpperCase()}
+                        </Badge>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-green-600 font-medium">
+                          {message.estimatedEngagement}% engagement
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {message.subject && (
+                      <div className="mb-2">
+                        <span className="text-sm font-medium text-gray-600">Subject:</span>
+                        <div className="text-sm text-gray-900">{message.subject}</div>
+                      </div>
+                    )}
+                    
+                    <div className="mb-3">
+                      <span className="text-sm font-medium text-gray-600">Content:</span>
+                      <div className="text-sm text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded mt-1">
+                        {message.content}
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      <div className="text-xs text-gray-500">
+                        <span className="font-medium">Personalized:</span> {message.personalizedElements.join(', ')}
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
