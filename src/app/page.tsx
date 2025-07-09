@@ -128,9 +128,21 @@ export default function LangchainWorkflow() {
                   <circle cx="90" cy="90" r="60" stroke="#38bdf8" strokeWidth="4" fill="none" />
                 </svg>
               </div>
-              <h3 className="font-bold text-2xl text-blue-800 mb-2 tracking-wide flex items-center gap-2">
-                Select Marketing Template
-              </h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-bold text-2xl text-blue-800 tracking-wide flex items-center gap-2">
+                  Select Marketing Template
+                </h3>
+                <Button
+                  onClick={() => {
+                    window.open('/campaign-builder', '_blank')
+                  }}
+                  variant="outline"
+                  size="sm"
+                  icon="🔥"
+                >
+                  New Builder
+                </Button>
+              </div>
               <select
                 value={selectedTemplateId}
                 onChange={(e) => {
