@@ -32,6 +32,18 @@ export default function CampaignBuilderPage() {
   const [culturalTriggers, setCulturalTriggers] = useState<string[]>([])
   const [customFlair, setCustomFlair] = useState('')
   const [isGenerating, setIsGenerating] = useState(false)
+  const [isBatchGenerating, setIsBatchGenerating] = useState(false)
+  const [showBatchOptions, setShowBatchOptions] = useState(false)
+  const [batchOptions, setBatchOptions] = useState({
+    maxMessages: 20,
+    minQualityScore: 70,
+    includeABVariants: true,
+    exportFormat: 'json' as 'json' | 'csv' | 'excel',
+    groupByChannel: false,
+    includeScoring: true
+  })
+  const [realTimePreview, setRealTimePreview] = useState<any>(null)
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false)
   const [generatedMessages, setGeneratedMessages] = useState<GeneratedMessage[]>([])
   const [campaignResults, setCampaignResults] = useState<{
     campaignId: string
@@ -121,6 +133,165 @@ export default function CampaignBuilderPage() {
       console.error('Error generating campaign:', error)
     } finally {
       setIsGenerating(false)
+    }
+  }
+
+  const handleBatchGeneration = async () => {
+    setIsBatchGenerating(true)
+    
+    const campaignData = {
+      campaignName,
+      channel,
+      campaignBrief,
+      demographics: {
+        ageRange,
+        gender: selectedGenders,
+        location: { zipCode, radius },
+        incomeLevel
+      },
+      behavioral: {
+        procedureHistory,
+        procedureNotTried,
+        lifetimeValueRange,
+        lastVisitRange,
+        engagementLevel
+      },
+      psychologicalTriggers: {
+        lifeEvents,
+        seasonal: seasonalTriggers,
+        cultural: culturalTriggers
+      },
+      customFlair
+    }
+    
+    try {
+      const response = await fetch('/api/batch-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignData,
+          options: batchOptions,
+          action: 'generate'
+        })
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        setGeneratedMessages(result.result.messages)
+        setCampaignResults({
+          campaignId: result.result.campaignId,
+          totalGenerated: result.result.totalGenerated,
+          estimatedReach: result.result.messages.length
+        })
+        alert(`Successfully generated ${result.result.totalGenerated} messages!`)
+      } else {
+        console.error('Batch generation failed:', result.error)
+      }
+    } catch (error) {
+      console.error('Error in batch generation:', error)
+    } finally {
+      setIsBatchGenerating(false)
+    }
+  }
+
+  const handleRealTimePreview = async () => {
+    setIsPreviewLoading(true)
+    
+    const campaignData = {
+      campaignName,
+      channel,
+      campaignBrief,
+      demographics: {
+        ageRange,
+        gender: selectedGenders,
+        location: { zipCode, radius },
+        incomeLevel
+      },
+      behavioral: {
+        procedureHistory,
+        procedureNotTried,
+        lifetimeValueRange,
+        lastVisitRange,
+        engagementLevel
+      },
+      psychologicalTriggers: {
+        lifeEvents,
+        seasonal: seasonalTriggers,
+        cultural: culturalTriggers
+      },
+      customFlair
+    }
+    
+    try {
+      const response = await fetch('/api/batch-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignData,
+          options: { patientName: 'Sample Patient' },
+          action: 'preview'
+        })
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        setRealTimePreview(result.preview)
+      } else {
+        console.error('Preview generation failed:', result.error)
+      }
+    } catch (error) {
+      console.error('Error in preview generation:', error)
+    } finally {
+      setIsPreviewLoading(false)
+    }
+  }
+
+  const handleOptimizePreview = async () => {
+    if (!realTimePreview) return
+    
+    try {
+      const response = await fetch('/api/batch-generator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          options: { messageId: realTimePreview.messageId },
+          action: 'optimize'
+        })
+      })
+      
+      const result = await response.json()
+      
+      if (result.success) {
+        setRealTimePreview(result.preview)
+      } else {
+        console.error('Preview optimization failed:', result.error)
+      }
+    } catch (error) {
+      console.error('Error in preview optimization:', error)
+    }
+  }
+
+  const handleExportCampaign = async (format: 'json' | 'csv' | 'excel') => {
+    if (!campaignResults) return
+    
+    const url = `/api/batch-generator?action=export&format=${format}&campaignId=${campaignResults.campaignId}`
+    
+    try {
+      const response = await fetch(url)
+      const blob = await response.blob()
+      
+      const downloadUrl = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = downloadUrl
+      a.download = `campaign_${campaignResults.campaignId}.${format}`
+      document.body.appendChild(a)
+      a.click()
+      window.URL.revokeObjectURL(downloadUrl)
+      document.body.removeChild(a)
+    } catch (error) {
+      console.error('Export failed:', error)
     }
   }
 
@@ -455,15 +626,106 @@ export default function CampaignBuilderPage() {
             </div>
 
             {/* Preview & Generate */}
-            <div className="flex justify-end">
-              <Button 
-                onClick={handleGeneratePreview}
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white"
-                disabled={isGenerating}
-              >
-                {isGenerating ? 'Generating...' : 'Preview & Generate'}
-              </Button>
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-3 justify-end">
+                <Button 
+                  onClick={handleRealTimePreview}
+                  size="md"
+                  variant="outline"
+                  disabled={isPreviewLoading}
+                  className="border-blue-500 text-blue-600 hover:bg-blue-50"
+                >
+                  {isPreviewLoading ? 'Loading...' : 'Real-Time Preview'}
+                </Button>
+                
+                <Button 
+                  onClick={handleGeneratePreview}
+                  size="md"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                  disabled={isGenerating}
+                >
+                  {isGenerating ? 'Generating...' : 'Quick Generate'}
+                </Button>
+                
+                <Button 
+                  onClick={() => setShowBatchOptions(!showBatchOptions)}
+                  size="md"
+                  variant="outline"
+                  className="border-green-500 text-green-600 hover:bg-green-50"
+                >
+                  Batch Options
+                </Button>
+              </div>
+              
+              {/* Batch Options Panel */}
+              {showBatchOptions && (
+                <div className="p-4 bg-gray-50 rounded-lg border">
+                  <h5 className="font-medium mb-3">Batch Generation Options</h5>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <Label htmlFor="maxMessages">Max Messages</Label>
+                      <Input
+                        id="maxMessages"
+                        type="number"
+                        value={batchOptions.maxMessages}
+                        onChange={(e) => setBatchOptions({...batchOptions, maxMessages: parseInt(e.target.value)})}
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="minQualityScore">Min Quality Score (%)</Label>
+                      <Input
+                        id="minQualityScore"
+                        type="number"
+                        value={batchOptions.minQualityScore}
+                        onChange={(e) => setBatchOptions({...batchOptions, minQualityScore: parseInt(e.target.value)})}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <Label htmlFor="exportFormat">Export Format</Label>
+                      <Select value={batchOptions.exportFormat} onValueChange={(value: 'json' | 'csv' | 'excel') => setBatchOptions({...batchOptions, exportFormat: value})}>
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="json">JSON</SelectItem>
+                          <SelectItem value="csv">CSV</SelectItem>
+                          <SelectItem value="excel">Excel</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex items-center space-x-4 pt-6">
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="includeABVariants"
+                          checked={batchOptions.includeABVariants}
+                          onCheckedChange={(checked) => setBatchOptions({...batchOptions, includeABVariants: checked})}
+                        />
+                        <Label htmlFor="includeABVariants">A/B Variants</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="includeScoring"
+                          checked={batchOptions.includeScoring}
+                          onCheckedChange={(checked) => setBatchOptions({...batchOptions, includeScoring: checked})}
+                        />
+                        <Label htmlFor="includeScoring">AI Scoring</Label>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    onClick={handleBatchGeneration}
+                    disabled={isBatchGenerating}
+                    className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white"
+                  >
+                    {isBatchGenerating ? 'Generating Batch...' : 'Generate Batch'}
+                  </Button>
+                </div>
+              )}
             </div>
             
             {/* Campaign Results */}
@@ -590,6 +852,99 @@ export default function CampaignBuilderPage() {
                     </div>
                   </div>
                 )}
+                
+                {/* Export Options */}
+                {campaignResults && (
+                  <div className="p-4 bg-gray-50 rounded-lg border">
+                    <h5 className="font-medium mb-3">Export Campaign</h5>
+                    <div className="flex gap-2">
+                      <Button
+                        onClick={() => handleExportCampaign('json')}
+                        size="sm"
+                        variant="outline"
+                      >
+                        Export JSON
+                      </Button>
+                      <Button
+                        onClick={() => handleExportCampaign('csv')}
+                        size="sm"
+                        variant="outline"
+                      >
+                        Export CSV
+                      </Button>
+                      <Button
+                        onClick={() => handleExportCampaign('excel')}
+                        size="sm"
+                        variant="outline"
+                      >
+                        Export Excel
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            
+            {/* Real-Time Preview */}
+            {realTimePreview && (
+              <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="font-semibold text-blue-800">Real-Time Preview</h4>
+                    <p className="text-sm text-blue-600">Last updated: {new Date(realTimePreview.lastUpdated).toLocaleTimeString()}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Badge variant={realTimePreview.isOptimized ? "default" : "secondary"}>
+                      {realTimePreview.isOptimized ? "Optimized" : "Original"}
+                    </Badge>
+                    <Badge variant="outline">
+                      Score: {realTimePreview.score}%
+                    </Badge>
+                  </div>
+                </div>
+                
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge variant="outline">{realTimePreview.channel.toUpperCase()}</Badge>
+                      <span className="font-medium">{realTimePreview.patientName}</span>
+                    </div>
+                    
+                    {realTimePreview.subject && (
+                      <div className="mb-3">
+                        <span className="text-sm font-medium text-gray-600">Subject:</span>
+                        <div className="text-sm text-gray-900 bg-white p-2 rounded border">
+                          {realTimePreview.subject}
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div>
+                      <span className="text-sm font-medium text-gray-600">Content:</span>
+                      <div className="text-sm text-gray-900 whitespace-pre-wrap bg-white p-3 rounded border mt-1">
+                        {realTimePreview.content}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={handleOptimizePreview}
+                      size="sm"
+                      className="bg-blue-600 text-white"
+                      disabled={realTimePreview.isOptimized}
+                    >
+                      {realTimePreview.isOptimized ? 'Already Optimized' : 'Optimize Preview'}
+                    </Button>
+                    <Button
+                      onClick={handleRealTimePreview}
+                      size="sm"
+                      variant="outline"
+                    >
+                      Refresh Preview
+                    </Button>
+                  </div>
+                </div>
               </div>
             )}
             
