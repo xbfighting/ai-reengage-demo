@@ -1,0 +1,2290 @@
+[
+  {
+    "id": "CUST001",
+    "name": "Sarah Mitchell",
+    "email": "sarah.mitchell@gmail.com",
+    "phone": "(310) 555-2341",
+    "age": 42,
+    "gender": "Female",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 18500,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-28",
+    "registrationDate": "2022-03-15",
+    "lastProcedure": "Botox",
+    "lastProcedureDate": "2024-10-15",
+    "nextMaintenanceDate": "2025-01-15",
+    "procedureHistory": [
+      {
+        "date": "2024-10-15",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-20",
+        "procedure": "Dermal Fillers",
+        "amount": 1200,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-04-10",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-12-05",
+        "procedure": "IPL",
+        "amount": 450,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-08-15",
+        "procedure": "Ultherapy",
+        "amount": 3500,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 18500,
+    "preferredDoctor": "Dr. Johnson",
+    "skinType": "Combination",
+    "concerns": ["anti-aging", "skin-texture", "pigmentation"],
+    "interactions": [
+      {
+        "date": "2024-12-28",
+        "type": "email",
+        "campaignId": "CAMP045",
+        "action": "opened"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "sms",
+        "campaignId": "CAMP042",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-10-15",
+        "type": "appointment",
+        "campaignId": "CAMP038",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox Touch-up",
+        "reason": "Approaching 3-month mark for optimal results",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Morpheus8",
+        "reason": "Complements current anti-aging regimen",
+        "suggestedDate": "2025-02-01",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST002",
+    "name": "Michael Chen",
+    "email": "m.chen@techcorp.com",
+    "phone": "(415) 555-8923",
+    "age": 38,
+    "gender": "Male",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    "lifecycleStage": "At-Risk",
+    "customerValue": 4200,
+    "loyaltyTier": "Silver",
+    "lastInteraction": "2024-11-10",
+    "registrationDate": "2023-06-20",
+    "lastProcedure": "Botox",
+    "lastProcedureDate": "2024-08-22",
+    "nextMaintenanceDate": "2024-12-22",
+    "procedureHistory": [
+      {
+        "date": "2024-08-22",
+        "procedure": "Botox",
+        "amount": 550,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-05-15",
+        "procedure": "Botox",
+        "amount": 550,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-02-10",
+        "procedure": "Botox",
+        "amount": 550,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-11-20",
+        "procedure": "CoolSculpting",
+        "amount": 2000,
+        "doctor": "Dr. Martinez",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 4200,
+    "preferredDoctor": "Dr. Anderson",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "body-contouring"],
+    "interactions": [
+      {
+        "date": "2024-11-10",
+        "type": "email",
+        "campaignId": "CAMP040",
+        "action": "opened"
+      },
+      {
+        "date": "2024-10-05",
+        "type": "sms",
+        "campaignId": "CAMP035",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Overdue for maintenance appointment",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      }
+    ]
+  },
+  {
+    "id": "CUST003",
+    "name": "Jennifer Rodriguez",
+    "email": "jrodriguez2023@yahoo.com",
+    "phone": "(305) 555-4567",
+    "age": 29,
+    "gender": "Female",
+    "location": {
+      "city": "Miami",
+      "state": "FL"
+    },
+    "lifecycleStage": "New",
+    "customerValue": 1800,
+    "loyaltyTier": "Bronze",
+    "lastInteraction": "2024-12-30",
+    "registrationDate": "2024-09-10",
+    "lastProcedure": "Lip Fillers",
+    "lastProcedureDate": "2024-11-28",
+    "nextMaintenanceDate": "2025-05-28",
+    "procedureHistory": [
+      {
+        "date": "2024-11-28",
+        "procedure": "Lip Fillers",
+        "amount": 800,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-15",
+        "procedure": "Chemical Peel",
+        "amount": 350,
+        "doctor": "Dr. Thompson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-09-20",
+        "procedure": "Consultation",
+        "amount": 0,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-20",
+        "procedure": "Botox",
+        "amount": 450,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 1800,
+    "preferredDoctor": "Dr. Garcia",
+    "skinType": "Oily",
+    "concerns": ["acne", "anti-aging", "lip-enhancement"],
+    "interactions": [
+      {
+        "date": "2024-12-30",
+        "type": "email",
+        "campaignId": "CAMP048",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-20",
+        "type": "sms",
+        "campaignId": "CAMP046",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-11-28",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "upsell",
+        "procedure": "Microneedling",
+        "reason": "Addresses acne scarring concerns",
+        "suggestedDate": "2025-02-15",
+        "priority": "medium"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for touch-up to maintain results",
+        "suggestedDate": "2025-01-20",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST004",
+    "name": "Patricia Williams",
+    "email": "patricia.williams@lawfirm.com",
+    "phone": "(212) 555-7890",
+    "age": 52,
+    "gender": "Female",
+    "location": {
+      "city": "New York",
+      "state": "NY"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 32000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-22",
+    "registrationDate": "2021-01-10",
+    "lastProcedure": "Facelift Touch-up",
+    "lastProcedureDate": "2024-11-15",
+    "nextMaintenanceDate": "2025-05-15",
+    "procedureHistory": [
+      {
+        "date": "2024-11-15",
+        "procedure": "Facelift Touch-up",
+        "amount": 2500,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-08-10",
+        "procedure": "Botox",
+        "amount": 750,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-05-20",
+        "procedure": "Dermal Fillers",
+        "amount": 1800,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-11-01",
+        "procedure": "Facelift",
+        "amount": 15000,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-06-15",
+        "procedure": "Ultherapy",
+        "amount": 4000,
+        "doctor": "Dr. Park",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 32000,
+    "preferredDoctor": "Dr. Goldstein",
+    "skinType": "Dry",
+    "concerns": ["anti-aging", "skin-texture", "neck-tightening"],
+    "interactions": [
+      {
+        "date": "2024-12-22",
+        "type": "email",
+        "campaignId": "CAMP044",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-10",
+        "type": "consultation",
+        "campaignId": "CAMP043",
+        "action": "completed"
+      },
+      {
+        "date": "2024-11-15",
+        "type": "appointment",
+        "campaignId": "CAMP039",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Regular quarterly maintenance",
+        "suggestedDate": "2025-02-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "PRP Therapy",
+        "reason": "Enhance skin quality post-facelift",
+        "suggestedDate": "2025-01-25",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST005",
+    "name": "David Thompson",
+    "email": "dthompson@gmail.com",
+    "phone": "(312) 555-3456",
+    "age": 45,
+    "gender": "Male",
+    "location": {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    "lifecycleStage": "Dormant",
+    "customerValue": 8500,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-09-15",
+    "registrationDate": "2022-08-20",
+    "lastProcedure": "Rhinoplasty",
+    "lastProcedureDate": "2023-10-10",
+    "nextMaintenanceDate": "2025-01-15",
+    "procedureHistory": [
+      {
+        "date": "2023-10-10",
+        "procedure": "Rhinoplasty",
+        "amount": 7000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-06-15",
+        "procedure": "Botox",
+        "amount": 600,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-03-20",
+        "procedure": "Botox",
+        "amount": 600,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2022-12-10",
+        "procedure": "Chemical Peel",
+        "amount": 300,
+        "doctor": "Dr. Davis",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 8500,
+    "preferredDoctor": "Dr. Wilson",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "facial-symmetry"],
+    "interactions": [
+      {
+        "date": "2024-09-15",
+        "type": "email",
+        "campaignId": "CAMP032",
+        "action": "opened"
+      },
+      {
+        "date": "2024-08-01",
+        "type": "sms",
+        "campaignId": "CAMP028",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Previous regular customer - win back opportunity",
+        "suggestedDate": "2025-01-20",
+        "priority": "high"
+      }
+    ]
+  },
+  {
+    "id": "CUST006",
+    "name": "Ashley Martinez",
+    "email": "ashleym@fitnessfirst.com",
+    "phone": "(310) 555-9876",
+    "age": 34,
+    "gender": "Female",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 12000,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-29",
+    "registrationDate": "2022-11-15",
+    "lastProcedure": "CoolSculpting",
+    "lastProcedureDate": "2024-11-20",
+    "nextMaintenanceDate": "2025-03-20",
+    "procedureHistory": [
+      {
+        "date": "2024-11-20",
+        "procedure": "CoolSculpting",
+        "amount": 2500,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-10",
+        "procedure": "Botox",
+        "amount": 500,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-15",
+        "procedure": "Botox",
+        "amount": 500,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-03-20",
+        "procedure": "CoolSculpting",
+        "amount": 2500,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-12-10",
+        "procedure": "Microneedling",
+        "amount": 450,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 12000,
+    "preferredDoctor": "Dr. Lee",
+    "skinType": "Combination",
+    "concerns": ["body-contouring", "anti-aging", "skin-texture"],
+    "interactions": [
+      {
+        "date": "2024-12-29",
+        "type": "email",
+        "campaignId": "CAMP047",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "sms",
+        "campaignId": "CAMP042",
+        "action": "booked"
+      },
+      {
+        "date": "2024-11-20",
+        "type": "appointment",
+        "campaignId": "CAMP040",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for quarterly touch-up",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Emsculpt",
+        "reason": "Complements CoolSculpting results",
+        "suggestedDate": "2025-02-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST007",
+    "name": "Elizabeth Davis",
+    "email": "liz.davis@gmail.com",
+    "phone": "(305) 555-2468",
+    "age": 58,
+    "gender": "Female",
+    "location": {
+      "city": "Miami",
+      "state": "FL"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 25000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-27",
+    "registrationDate": "2021-05-20",
+    "lastProcedure": "Thread Lift",
+    "lastProcedureDate": "2024-12-10",
+    "nextMaintenanceDate": "2025-06-10",
+    "procedureHistory": [
+      {
+        "date": "2024-12-10",
+        "procedure": "Thread Lift",
+        "amount": 3500,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-15",
+        "procedure": "Botox",
+        "amount": 800,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-20",
+        "procedure": "Dermal Fillers",
+        "amount": 2000,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-03-10",
+        "procedure": "IPL",
+        "amount": 500,
+        "doctor": "Dr. Thompson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-11-15",
+        "procedure": "Tummy Tuck",
+        "amount": 12000,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 25000,
+    "preferredDoctor": "Dr. Rodriguez",
+    "skinType": "Dry",
+    "concerns": ["anti-aging", "body-contouring", "skin-texture"],
+    "interactions": [
+      {
+        "date": "2024-12-27",
+        "type": "email",
+        "campaignId": "CAMP045",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-10",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      },
+      {
+        "date": "2024-11-25",
+        "type": "consultation",
+        "campaignId": "CAMP040",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Quarterly maintenance schedule",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Morpheus8",
+        "reason": "Enhance thread lift results",
+        "suggestedDate": "2025-02-01",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST008",
+    "name": "Robert Johnson",
+    "email": "rjohnson@techstartup.io",
+    "phone": "(415) 555-1234",
+    "age": 41,
+    "gender": "Male",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    "lifecycleStage": "New",
+    "customerValue": 2200,
+    "loyaltyTier": "Silver",
+    "lastInteraction": "2024-12-28",
+    "registrationDate": "2024-10-01",
+    "lastProcedure": "Laser Hair Removal",
+    "lastProcedureDate": "2024-12-05",
+    "nextMaintenanceDate": "2025-01-05",
+    "procedureHistory": [
+      {
+        "date": "2024-12-05",
+        "procedure": "Laser Hair Removal",
+        "amount": 600,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-11-05",
+        "procedure": "Laser Hair Removal",
+        "amount": 600,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-15",
+        "procedure": "Botox",
+        "amount": 500,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-10-05",
+        "procedure": "Consultation",
+        "amount": 0,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 2200,
+    "preferredDoctor": "Dr. Park",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "hair-removal"],
+    "interactions": [
+      {
+        "date": "2024-12-28",
+        "type": "sms",
+        "campaignId": "CAMP046",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-05",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Laser Hair Removal",
+        "reason": "Continue treatment series",
+        "suggestedDate": "2025-01-05",
+        "priority": "high"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for touch-up",
+        "suggestedDate": "2025-01-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST009",
+    "name": "Maria Gonzalez",
+    "email": "mgonzalez@realestate.com",
+    "phone": "(212) 555-5678",
+    "age": 37,
+    "gender": "Female",
+    "location": {
+      "city": "New York",
+      "state": "NY"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 9800,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-30",
+    "registrationDate": "2023-02-10",
+    "lastProcedure": "Botox",
+    "lastProcedureDate": "2024-12-20",
+    "nextMaintenanceDate": "2025-03-20",
+    "procedureHistory": [
+      {
+        "date": "2024-12-20",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-15",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-10",
+        "procedure": "Dermal Fillers",
+        "amount": 1500,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-04-20",
+        "procedure": "Chemical Peel",
+        "amount": 400,
+        "doctor": "Dr. Kim",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-01-15",
+        "procedure": "Microneedling",
+        "amount": 500,
+        "doctor": "Dr. Kim",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 9800,
+    "preferredDoctor": "Dr. Goldstein",
+    "skinType": "Combination",
+    "concerns": ["anti-aging", "pigmentation", "skin-texture"],
+    "interactions": [
+      {
+        "date": "2024-12-30",
+        "type": "email",
+        "campaignId": "CAMP048",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-20",
+        "type": "appointment",
+        "campaignId": "CAMP044",
+        "action": "completed"
+      },
+      {
+        "date": "2024-12-10",
+        "type": "sms",
+        "campaignId": "CAMP043",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "upsell",
+        "procedure": "IPL",
+        "reason": "Address pigmentation concerns",
+        "suggestedDate": "2025-02-01",
+        "priority": "medium"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Dermal Fillers",
+        "reason": "Annual touch-up recommended",
+        "suggestedDate": "2025-07-10",
+        "priority": "low"
+      }
+    ]
+  },
+  {
+    "id": "CUST010",
+    "name": "Christopher Lee",
+    "email": "chris.lee@consulting.com",
+    "phone": "(312) 555-9012",
+    "age": 48,
+    "gender": "Male",
+    "location": {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    "lifecycleStage": "At-Risk",
+    "customerValue": 6500,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-11-01",
+    "registrationDate": "2022-09-15",
+    "lastProcedure": "CoolSculpting",
+    "lastProcedureDate": "2024-07-20",
+    "nextMaintenanceDate": "2025-01-20",
+    "procedureHistory": [
+      {
+        "date": "2024-07-20",
+        "procedure": "CoolSculpting",
+        "amount": 3000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-04-10",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-01-15",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-10-20",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 6500,
+    "preferredDoctor": "Dr. Brown",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "body-contouring"],
+    "interactions": [
+      {
+        "date": "2024-11-01",
+        "type": "email",
+        "campaignId": "CAMP037",
+        "action": "opened"
+      },
+      {
+        "date": "2024-10-15",
+        "type": "sms",
+        "campaignId": "CAMP034",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Overdue for regular maintenance",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "CoolSculpting Follow-up",
+        "reason": "6-month assessment recommended",
+        "suggestedDate": "2025-01-20",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST011",
+    "name": "Amanda White",
+    "email": "amanda.white@fashionhouse.com",
+    "phone": "(310) 555-3690",
+    "age": 31,
+    "gender": "Female",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 7200,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-29",
+    "registrationDate": "2023-04-20",
+    "lastProcedure": "Lip Fillers",
+    "lastProcedureDate": "2024-12-15",
+    "nextMaintenanceDate": "2025-06-15",
+    "procedureHistory": [
+      {
+        "date": "2024-12-15",
+        "procedure": "Lip Fillers",
+        "amount": 900,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-01",
+        "procedure": "Botox",
+        "amount": 450,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-15",
+        "procedure": "Botox",
+        "amount": 450,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-01",
+        "procedure": "Lip Fillers",
+        "amount": 900,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-03-20",
+        "procedure": "Chemical Peel",
+        "amount": 350,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 7200,
+    "preferredDoctor": "Dr. Johnson",
+    "skinType": "Combination",
+    "concerns": ["lip-enhancement", "anti-aging", "acne"],
+    "interactions": [
+      {
+        "date": "2024-12-29",
+        "type": "email",
+        "campaignId": "CAMP047",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "appointment",
+        "campaignId": "CAMP043",
+        "action": "completed"
+      },
+      {
+        "date": "2024-12-01",
+        "type": "sms",
+        "campaignId": "CAMP041",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for quarterly treatment",
+        "suggestedDate": "2025-01-01",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Cheek Fillers",
+        "reason": "Complements lip enhancement",
+        "suggestedDate": "2025-02-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST012",
+    "name": "Jessica Taylor",
+    "email": "jtaylor@marketing.com",
+    "phone": "(305) 555-7531",
+    "age": 39,
+    "gender": "Female",
+    "location": {
+      "city": "Miami",
+      "state": "FL"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 15500,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-28",
+    "registrationDate": "2022-01-15",
+    "lastProcedure": "Morpheus8",
+    "lastProcedureDate": "2024-11-30",
+    "nextMaintenanceDate": "2025-02-28",
+    "procedureHistory": [
+      {
+        "date": "2024-11-30",
+        "procedure": "Morpheus8",
+        "amount": 2500,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-20",
+        "procedure": "Botox",
+        "amount": 750,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-15",
+        "procedure": "Botox",
+        "amount": 750,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-05-01",
+        "procedure": "IPL",
+        "amount": 550,
+        "doctor": "Dr. Thompson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-02-10",
+        "procedure": "Ultherapy",
+        "amount": 3800,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 15500,
+    "preferredDoctor": "Dr. Garcia",
+    "skinType": "Sensitive",
+    "concerns": ["anti-aging", "skin-texture", "neck-tightening"],
+    "interactions": [
+      {
+        "date": "2024-12-28",
+        "type": "email",
+        "campaignId": "CAMP046",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "sms",
+        "campaignId": "CAMP042",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-11-30",
+        "type": "appointment",
+        "campaignId": "CAMP040",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Regular quarterly treatment",
+        "suggestedDate": "2025-01-20",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "PRP with Microneedling",
+        "reason": "Enhance Morpheus8 results",
+        "suggestedDate": "2025-02-28",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST013",
+    "name": "Brian Miller",
+    "email": "bmiller@finance.com",
+    "phone": "(212) 555-4321",
+    "age": 55,
+    "gender": "Male",
+    "location": {
+      "city": "New York",
+      "state": "NY"
+    },
+    "lifecycleStage": "Dormant",
+    "customerValue": 22000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-08-15",
+    "registrationDate": "2021-06-10",
+    "lastProcedure": "Liposuction",
+    "lastProcedureDate": "2023-09-15",
+    "nextMaintenanceDate": "2025-01-15",
+    "procedureHistory": [
+      {
+        "date": "2023-09-15",
+        "procedure": "Liposuction",
+        "amount": 12000,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-06-10",
+        "procedure": "Botox",
+        "amount": 800,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-03-15",
+        "procedure": "Botox",
+        "amount": 800,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2022-12-20",
+        "procedure": "CoolSculpting",
+        "amount": 3500,
+        "doctor": "Dr. Kim",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2022-09-10",
+        "procedure": "Ultherapy",
+        "amount": 4100,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 22000,
+    "preferredDoctor": "Dr. Goldstein",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "body-contouring"],
+    "interactions": [
+      {
+        "date": "2024-08-15",
+        "type": "email",
+        "campaignId": "CAMP030",
+        "action": "opened"
+      },
+      {
+        "date": "2024-07-01",
+        "type": "email",
+        "campaignId": "CAMP025",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Win back high-value customer",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Emsculpt",
+        "reason": "Maintain liposuction results",
+        "suggestedDate": "2025-02-01",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST014",
+    "name": "Nicole Anderson",
+    "email": "nicole.anderson@wellness.com",
+    "phone": "(415) 555-6789",
+    "age": 28,
+    "gender": "Female",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    "lifecycleStage": "New",
+    "customerValue": 1200,
+    "loyaltyTier": "Bronze",
+    "lastInteraction": "2024-12-30",
+    "registrationDate": "2024-11-01",
+    "lastProcedure": "Botox",
+    "lastProcedureDate": "2024-12-10",
+    "nextMaintenanceDate": "2025-03-10",
+    "procedureHistory": [
+      {
+        "date": "2024-12-10",
+        "procedure": "Botox",
+        "amount": 400,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-11-15",
+        "procedure": "Chemical Peel",
+        "amount": 300,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-11-05",
+        "procedure": "Consultation",
+        "amount": 0,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-11-05",
+        "procedure": "Microneedling",
+        "amount": 500,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 1200,
+    "preferredDoctor": "Dr. Anderson",
+    "skinType": "Oily",
+    "concerns": ["acne", "anti-aging", "skin-texture"],
+    "interactions": [
+      {
+        "date": "2024-12-30",
+        "type": "email",
+        "campaignId": "CAMP048",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-10",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "upsell",
+        "procedure": "IPL for Acne",
+        "reason": "Target acne concerns",
+        "suggestedDate": "2025-01-25",
+        "priority": "medium"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Maintain preventative results",
+        "suggestedDate": "2025-03-10",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST015",
+    "name": "Sophia Brown",
+    "email": "sophia.b@eventplanning.com",
+    "phone": "(312) 555-2580",
+    "age": 44,
+    "gender": "Female",
+    "location": {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 28000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-27",
+    "registrationDate": "2021-03-10",
+    "lastProcedure": "Breast Augmentation Touch-up",
+    "lastProcedureDate": "2024-10-20",
+    "nextMaintenanceDate": "2025-01-20",
+    "procedureHistory": [
+      {
+        "date": "2024-10-20",
+        "procedure": "Breast Augmentation Touch-up",
+        "amount": 3000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-08-15",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-05-10",
+        "procedure": "Dermal Fillers",
+        "amount": 1800,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-10-15",
+        "procedure": "Breast Augmentation",
+        "amount": 10000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-06-20",
+        "procedure": "Tummy Tuck",
+        "amount": 9000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 28000,
+    "preferredDoctor": "Dr. Wilson",
+    "skinType": "Dry",
+    "concerns": ["anti-aging", "body-contouring", "breast-enhancement"],
+    "interactions": [
+      {
+        "date": "2024-12-27",
+        "type": "email",
+        "campaignId": "CAMP045",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-20",
+        "type": "sms",
+        "campaignId": "CAMP044",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-10-20",
+        "type": "appointment",
+        "campaignId": "CAMP036",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for quarterly treatment",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Thread Lift",
+        "reason": "Non-surgical facial rejuvenation",
+        "suggestedDate": "2025-02-20",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST016",
+    "name": "Daniel Wilson",
+    "email": "dwilson@lawoffice.com",
+    "phone": "(310) 555-8520",
+    "age": 49,
+    "gender": "Male",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    "lifecycleStage": "At-Risk",
+    "customerValue": 5600,
+    "loyaltyTier": "Silver",
+    "lastInteraction": "2024-10-30",
+    "registrationDate": "2023-01-20",
+    "lastProcedure": "Botox",
+    "lastProcedureDate": "2024-08-10",
+    "nextMaintenanceDate": "2024-12-10",
+    "procedureHistory": [
+      {
+        "date": "2024-08-10",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-05-15",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-02-20",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-11-10",
+        "procedure": "Chemical Peel",
+        "amount": 400,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-08-15",
+        "procedure": "CoolSculpting",
+        "amount": 3100,
+        "doctor": "Dr. Martinez",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 5600,
+    "preferredDoctor": "Dr. Johnson",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "body-contouring"],
+    "interactions": [
+      {
+        "date": "2024-10-30",
+        "type": "email",
+        "campaignId": "CAMP036",
+        "action": "opened"
+      },
+      {
+        "date": "2024-09-15",
+        "type": "sms",
+        "campaignId": "CAMP033",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Overdue for maintenance",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Dermal Fillers",
+        "reason": "Complement Botox results",
+        "suggestedDate": "2025-02-01",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST017",
+    "name": "Rachel Green",
+    "email": "rachel.green@media.com",
+    "phone": "(212) 555-9630",
+    "age": 35,
+    "gender": "Female",
+    "location": {
+      "city": "New York",
+      "state": "NY"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 11200,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-29",
+    "registrationDate": "2022-07-15",
+    "lastProcedure": "Dermal Fillers",
+    "lastProcedureDate": "2024-12-05",
+    "nextMaintenanceDate": "2025-06-05",
+    "procedureHistory": [
+      {
+        "date": "2024-12-05",
+        "procedure": "Dermal Fillers",
+        "amount": 1600,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-10",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-15",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-01",
+        "procedure": "Dermal Fillers",
+        "amount": 1600,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-03-10",
+        "procedure": "IPL",
+        "amount": 500,
+        "doctor": "Dr. Kim",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 11200,
+    "preferredDoctor": "Dr. Goldstein",
+    "skinType": "Combination",
+    "concerns": ["anti-aging", "lip-enhancement", "pigmentation"],
+    "interactions": [
+      {
+        "date": "2024-12-29",
+        "type": "email",
+        "campaignId": "CAMP047",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-05",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      },
+      {
+        "date": "2024-11-20",
+        "type": "sms",
+        "campaignId": "CAMP040",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Quarterly touch-up due",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Morpheus8",
+        "reason": "Enhance skin texture concerns",
+        "suggestedDate": "2025-02-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST018",
+    "name": "Karen Davis",
+    "email": "kdavis@retailchain.com",
+    "phone": "(305) 555-7410",
+    "age": 61,
+    "gender": "Female",
+    "location": {
+      "city": "Miami",
+      "state": "FL"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 42000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-26",
+    "registrationDate": "2020-09-10",
+    "lastProcedure": "Facelift",
+    "lastProcedureDate": "2024-09-15",
+    "nextMaintenanceDate": "2025-03-15",
+    "procedureHistory": [
+      {
+        "date": "2024-09-15",
+        "procedure": "Facelift",
+        "amount": 18000,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-10",
+        "procedure": "Botox",
+        "amount": 900,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-03-15",
+        "procedure": "Dermal Fillers",
+        "amount": 2500,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-12-20",
+        "procedure": "Thread Lift",
+        "amount": 4000,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-08-10",
+        "procedure": "Ultherapy",
+        "amount": 4500,
+        "doctor": "Dr. Rodriguez",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 42000,
+    "preferredDoctor": "Dr. Rodriguez",
+    "skinType": "Dry",
+    "concerns": ["anti-aging", "neck-tightening", "skin-texture"],
+    "interactions": [
+      {
+        "date": "2024-12-26",
+        "type": "email",
+        "campaignId": "CAMP045",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "consultation",
+        "campaignId": "CAMP042",
+        "action": "completed"
+      },
+      {
+        "date": "2024-09-15",
+        "type": "appointment",
+        "campaignId": "CAMP034",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Post-facelift maintenance",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "PRP Therapy",
+        "reason": "Enhance facelift healing and results",
+        "suggestedDate": "2025-01-20",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST019",
+    "name": "James Thompson",
+    "email": "jthompson@sportsmedicine.com",
+    "phone": "(415) 555-1470",
+    "age": 36,
+    "gender": "Male",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 8900,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-28",
+    "registrationDate": "2023-03-15",
+    "lastProcedure": "Emsculpt",
+    "lastProcedureDate": "2024-12-01",
+    "nextMaintenanceDate": "2025-03-01",
+    "procedureHistory": [
+      {
+        "date": "2024-12-01",
+        "procedure": "Emsculpt",
+        "amount": 2000,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-15",
+        "procedure": "CoolSculpting",
+        "amount": 2800,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-20",
+        "procedure": "Botox",
+        "amount": 500,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-04-10",
+        "procedure": "Botox",
+        "amount": 500,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-01-15",
+        "procedure": "Laser Hair Removal",
+        "amount": 1200,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 8900,
+    "preferredDoctor": "Dr. Park",
+    "skinType": "Normal",
+    "concerns": ["body-contouring", "anti-aging", "hair-removal"],
+    "interactions": [
+      {
+        "date": "2024-12-28",
+        "type": "email",
+        "campaignId": "CAMP046",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-01",
+        "type": "appointment",
+        "campaignId": "CAMP041",
+        "action": "completed"
+      },
+      {
+        "date": "2024-11-15",
+        "type": "sms",
+        "campaignId": "CAMP039",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Due for quarterly treatment",
+        "suggestedDate": "2025-01-20",
+        "priority": "medium"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Emsculpt Neo",
+        "reason": "Enhanced version now available",
+        "suggestedDate": "2025-03-01",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST020",
+    "name": "Linda Martinez",
+    "email": "lmartinez@nonprofit.org",
+    "phone": "(312) 555-3690",
+    "age": 47,
+    "gender": "Female",
+    "location": {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    "lifecycleStage": "Dormant",
+    "customerValue": 6800,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-07-20",
+    "registrationDate": "2022-05-10",
+    "lastProcedure": "Ultherapy",
+    "lastProcedureDate": "2024-03-15",
+    "nextMaintenanceDate": "2025-03-15",
+    "procedureHistory": [
+      {
+        "date": "2024-03-15",
+        "procedure": "Ultherapy",
+        "amount": 3700,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-12-10",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-09-15",
+        "procedure": "Botox",
+        "amount": 650,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-06-20",
+        "procedure": "Chemical Peel",
+        "amount": 400,
+        "doctor": "Dr. Davis",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2023-03-10",
+        "procedure": "Dermal Fillers",
+        "amount": 1400,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 6800,
+    "preferredDoctor": "Dr. Brown",
+    "skinType": "Combination",
+    "concerns": ["anti-aging", "neck-tightening", "pigmentation"],
+    "interactions": [
+      {
+        "date": "2024-07-20",
+        "type": "email",
+        "campaignId": "CAMP027",
+        "action": "opened"
+      },
+      {
+        "date": "2024-06-15",
+        "type": "email",
+        "campaignId": "CAMP022",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Win back valued customer",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Ultherapy Annual Check",
+        "reason": "One-year follow-up recommended",
+        "suggestedDate": "2025-03-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST021",
+    "name": "Emily Johnson",
+    "email": "emily.j@startupfounder.com",
+    "phone": "(310) 555-2580",
+    "age": 32,
+    "gender": "Female",
+    "location": {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    "lifecycleStage": "New",
+    "customerValue": 2600,
+    "loyaltyTier": "Silver",
+    "lastInteraction": "2024-12-30",
+    "registrationDate": "2024-10-15",
+    "lastProcedure": "Morpheus8",
+    "lastProcedureDate": "2024-12-20",
+    "nextMaintenanceDate": "2025-03-20",
+    "procedureHistory": [
+      {
+        "date": "2024-12-20",
+        "procedure": "Morpheus8",
+        "amount": 1800,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-11-10",
+        "procedure": "Botox",
+        "amount": 400,
+        "doctor": "Dr. Johnson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-20",
+        "procedure": "Chemical Peel",
+        "amount": 400,
+        "doctor": "Dr. Chen",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 2600,
+    "preferredDoctor": "Dr. Chen",
+    "skinType": "Sensitive",
+    "concerns": ["anti-aging", "skin-texture", "acne"],
+    "interactions": [
+      {
+        "date": "2024-12-30",
+        "type": "email",
+        "campaignId": "CAMP048",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-20",
+        "type": "appointment",
+        "campaignId": "CAMP044",
+        "action": "completed"
+      },
+      {
+        "date": "2024-12-10",
+        "type": "sms",
+        "campaignId": "CAMP043",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Maintain preventative care",
+        "suggestedDate": "2025-02-10",
+        "priority": "medium"
+      },
+      {
+        "type": "upsell",
+        "procedure": "IPL for Acne",
+        "reason": "Address acne concerns",
+        "suggestedDate": "2025-01-25",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST022",
+    "name": "Mark Anderson",
+    "email": "manderson@venturecapital.com",
+    "phone": "(415) 555-7890",
+    "age": 43,
+    "gender": "Male",
+    "location": {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 14500,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-12-27",
+    "registrationDate": "2022-04-20",
+    "lastProcedure": "Rhinoplasty Touch-up",
+    "lastProcedureDate": "2024-11-25",
+    "nextMaintenanceDate": "2025-02-25",
+    "procedureHistory": [
+      {
+        "date": "2024-11-25",
+        "procedure": "Rhinoplasty Touch-up",
+        "amount": 2500,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-09-10",
+        "procedure": "Botox",
+        "amount": 600,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-06-15",
+        "procedure": "Botox",
+        "amount": 600,
+        "doctor": "Dr. Anderson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-11-20",
+        "procedure": "Rhinoplasty",
+        "amount": 8000,
+        "doctor": "Dr. Park",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-08-10",
+        "procedure": "Chemical Peel",
+        "amount": 450,
+        "doctor": "Dr. Lee",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 14500,
+    "preferredDoctor": "Dr. Park",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "facial-symmetry"],
+    "interactions": [
+      {
+        "date": "2024-12-27",
+        "type": "email",
+        "campaignId": "CAMP045",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-11-25",
+        "type": "appointment",
+        "campaignId": "CAMP040",
+        "action": "completed"
+      },
+      {
+        "date": "2024-11-10",
+        "type": "consultation",
+        "campaignId": "CAMP039",
+        "action": "completed"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Regular quarterly treatment",
+        "suggestedDate": "2025-01-10",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "Dermal Fillers",
+        "reason": "Enhance facial symmetry",
+        "suggestedDate": "2025-02-25",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST023",
+    "name": "Lauren Wilson",
+    "email": "lauren.wilson@pr-agency.com",
+    "phone": "(212) 555-1590",
+    "age": 40,
+    "gender": "Female",
+    "location": {
+      "city": "New York",
+      "state": "NY"
+    },
+    "lifecycleStage": "At-Risk",
+    "customerValue": 7300,
+    "loyaltyTier": "Gold",
+    "lastInteraction": "2024-11-05",
+    "registrationDate": "2023-01-10",
+    "lastProcedure": "Dermal Fillers",
+    "lastProcedureDate": "2024-08-20",
+    "nextMaintenanceDate": "2025-02-20",
+    "procedureHistory": [
+      {
+        "date": "2024-08-20",
+        "procedure": "Dermal Fillers",
+        "amount": 1700,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-05-15",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-02-10",
+        "procedure": "Botox",
+        "amount": 700,
+        "doctor": "Dr. Goldstein",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-11-20",
+        "procedure": "Ultherapy",
+        "amount": 3500,
+        "doctor": "Dr. Park",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 7300,
+    "preferredDoctor": "Dr. Goldstein",
+    "skinType": "Combination",
+    "concerns": ["anti-aging", "neck-tightening", "lip-enhancement"],
+    "interactions": [
+      {
+        "date": "2024-11-05",
+        "type": "email",
+        "campaignId": "CAMP038",
+        "action": "opened"
+      },
+      {
+        "date": "2024-10-01",
+        "type": "sms",
+        "campaignId": "CAMP035",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Overdue for regular treatment",
+        "suggestedDate": "2025-01-15",
+        "priority": "high"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Dermal Fillers Touch-up",
+        "reason": "6-month maintenance approaching",
+        "suggestedDate": "2025-02-20",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST024",
+    "name": "Christina Lopez",
+    "email": "clopez@hospitality.com",
+    "phone": "(305) 555-9510",
+    "age": 53,
+    "gender": "Female",
+    "location": {
+      "city": "Miami",
+      "state": "FL"
+    },
+    "lifecycleStage": "Active",
+    "customerValue": 19500,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-12-29",
+    "registrationDate": "2021-11-10",
+    "lastProcedure": "Thread Lift",
+    "lastProcedureDate": "2024-12-15",
+    "nextMaintenanceDate": "2025-06-15",
+    "procedureHistory": [
+      {
+        "date": "2024-12-15",
+        "procedure": "Thread Lift",
+        "amount": 3200,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-10-01",
+        "procedure": "Botox",
+        "amount": 850,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-07-10",
+        "procedure": "Botox",
+        "amount": 850,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2024-05-15",
+        "procedure": "IPL",
+        "amount": 600,
+        "doctor": "Dr. Thompson",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2024-02-20",
+        "procedure": "Morpheus8",
+        "amount": 2800,
+        "doctor": "Dr. Garcia",
+        "satisfaction": "Very Satisfied"
+      }
+    ],
+    "totalSpent": 19500,
+    "preferredDoctor": "Dr. Garcia",
+    "skinType": "Dry",
+    "concerns": ["anti-aging", "skin-texture", "pigmentation"],
+    "interactions": [
+      {
+        "date": "2024-12-29",
+        "type": "email",
+        "campaignId": "CAMP047",
+        "action": "clicked"
+      },
+      {
+        "date": "2024-12-15",
+        "type": "appointment",
+        "campaignId": "CAMP043",
+        "action": "completed"
+      },
+      {
+        "date": "2024-12-01",
+        "type": "sms",
+        "campaignId": "CAMP041",
+        "action": "booked"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "maintenance",
+        "procedure": "Botox",
+        "reason": "Quarterly treatment schedule",
+        "suggestedDate": "2025-01-01",
+        "priority": "high"
+      },
+      {
+        "type": "upsell",
+        "procedure": "PRP with Microneedling",
+        "reason": "Enhance thread lift results",
+        "suggestedDate": "2025-02-15",
+        "priority": "medium"
+      }
+    ]
+  },
+  {
+    "id": "CUST025",
+    "name": "Steven Clark",
+    "email": "sclark@architecture.com",
+    "phone": "(312) 555-6420",
+    "age": 50,
+    "gender": "Male",
+    "location": {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    "lifecycleStage": "Dormant",
+    "customerValue": 16000,
+    "loyaltyTier": "Platinum",
+    "lastInteraction": "2024-08-01",
+    "registrationDate": "2021-12-15",
+    "lastProcedure": "Liposuction",
+    "lastProcedureDate": "2023-11-20",
+    "nextMaintenanceDate": "2025-01-20",
+    "procedureHistory": [
+      {
+        "date": "2023-11-20",
+        "procedure": "Liposuction",
+        "amount": 10000,
+        "doctor": "Dr. Wilson",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-08-15",
+        "procedure": "Botox",
+        "amount": 750,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-05-10",
+        "procedure": "Botox",
+        "amount": 750,
+        "doctor": "Dr. Brown",
+        "satisfaction": "Very Satisfied"
+      },
+      {
+        "date": "2023-02-15",
+        "procedure": "CoolSculpting",
+        "amount": 3000,
+        "doctor": "Dr. Davis",
+        "satisfaction": "Satisfied"
+      },
+      {
+        "date": "2022-11-20",
+        "procedure": "Chemical Peel",
+        "amount": 500,
+        "doctor": "Dr. Davis",
+        "satisfaction": "Satisfied"
+      }
+    ],
+    "totalSpent": 16000,
+    "preferredDoctor": "Dr. Wilson",
+    "skinType": "Normal",
+    "concerns": ["anti-aging", "body-contouring"],
+    "interactions": [
+      {
+        "date": "2024-08-01",
+        "type": "email",
+        "campaignId": "CAMP029",
+        "action": "opened"
+      },
+      {
+        "date": "2024-06-15",
+        "type": "email",
+        "campaignId": "CAMP023",
+        "action": "opened"
+      }
+    ],
+    "recommendedActions": [
+      {
+        "type": "reactivation",
+        "procedure": "Botox",
+        "reason": "Win back high-value customer",
+        "suggestedDate": "2025-01-20",
+        "priority": "high"
+      },
+      {
+        "type": "maintenance",
+        "procedure": "Body Contouring Assessment",
+        "reason": "Post-lipo annual check",
+        "suggestedDate": "2025-01-20",
+        "priority": "medium"
+      }
+    ]
+  }
+]
